@@ -104,7 +104,7 @@ export default function CheckoutPage() {
               const orderId = data.orderId || "OK";
               const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
               const message = buildWhatsAppMessage({
-                storeName: "BatyTech",
+                storeName: "BatysTech",
                 orderId,
                 customer: { customerName, email, phone, address },
                 items: items.map((i) => ({

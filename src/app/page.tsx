@@ -42,7 +42,7 @@ export default async function Home() {
           </div>
           <div className="flex flex-col gap-4">
             <h1 className="section-heading text-3xl font-semibold tracking-tight text-zinc-950 sm:text-5xl">
-              Componentes de PC para armar tu setup en BatyTech
+              Componentes de PC para armar tu setup en BatysTech
             </h1>
             <p className="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
               Procesadores, GPUs, motherboards, memorias, almacenamiento y mas. Compra rapido, facil y con stock real.

@@ -51,7 +51,7 @@ const demoCategories: StoreCategory[] = [
 ];
 
 const demoBrands: StoreBrand[] = [
-  { id: "batytech", name: "BatyTech", slug: "batytech" },
+  { id: "batytech", name: "BatysTech", slug: "batytech" },
   { id: "amd", name: "AMD", slug: "amd" },
   { id: "intel", name: "Intel", slug: "intel" },
   { id: "nvidia", name: "NVIDIA", slug: "nvidia" },

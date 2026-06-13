@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { ownerAdminPath } from "@/lib/admin";
 import { formatMoney } from "@/lib/money";
+import { getOrderStatusLabel } from "@/lib/order-status";
 
 export const dynamic = "force-dynamic";
 
@@ -37,7 +38,7 @@ export default async function AdminOrdersPage() {
                 <div className="font-semibold text-zinc-900">{o.customerName}</div>
                 <div className="text-xs text-zinc-600">{o.email}</div>
               </div>
-              <div className="col-span-2 font-medium">{o.status}</div>
+              <div className="col-span-2 font-medium">{getOrderStatusLabel(o.status)}</div>
               <div className="col-span-2 font-medium">{formatMoney(o.totalCents)}</div>
               <div className="col-span-1 flex justify-end">
                 <Link href={ownerAdminPath(`orders/${o.id}`)} className="text-sm font-medium text-amber-700 hover:underline">

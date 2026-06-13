@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { ownerAdminPath, requireAdmin } from "@/lib/admin";
 import { formatMoney } from "@/lib/money";
+import { getOrderStatusLabel, orderStatusOptions } from "@/lib/order-status";
 
 export const dynamic = "force-dynamic";
 
@@ -91,11 +92,13 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
             <form action={updateStatusAction} className="mt-3 flex flex-col gap-3">
               <input type="hidden" name="id" value={order.id} />
               <select name="status" defaultValue={order.status} className="h-10 rounded-xl border bg-white px-3 text-sm">
-                <option value="PENDING">PENDING</option>
-                <option value="PAID">PAID</option>
-                <option value="SHIPPED">SHIPPED</option>
-                <option value="CANCELLED">CANCELLED</option>
+                {orderStatusOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
+              <div className="text-xs text-zinc-600">Estado actual: {getOrderStatusLabel(order.status)}</div>
               <button type="submit" className="rounded-full bg-zinc-900 px-5 py-2 text-sm font-medium text-white">
                 Actualizar estado
               </button>

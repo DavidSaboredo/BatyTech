@@ -20,7 +20,7 @@ export function Header() {
         <Link href="/" className="flex shrink-0 items-center">
           <Image
             src="/brand/banner.jpeg"
-            alt="BatyTech"
+            alt="BatysTech"
             width={260}
             height={56}
             priority

@@ -1,5 +1,4 @@
-export function formatMoney(cents: number) {
-  const amount = cents / 100;
+export function formatMoney(amount: number) {
   return new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",

@@ -103,7 +103,7 @@ export default async function AdminNewProductPage() {
               <input name="sku" required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium">Precio (centavos ARS)</label>
+              <label className="text-sm font-medium">Precio (ARS)</label>
               <input name="priceCents" type="number" min={0} required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
             </div>
             <div className="flex flex-col gap-1">

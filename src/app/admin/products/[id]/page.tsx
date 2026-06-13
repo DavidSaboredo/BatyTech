@@ -120,7 +120,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium">Precio (centavos ARS)</label>
+              <label className="text-sm font-medium">Precio (ARS)</label>
               <input
                 name="priceCents"
                 type="number"

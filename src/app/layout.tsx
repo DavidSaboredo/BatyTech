@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BatyTech",
+  title: "BatysTech",
   description: "Tienda de componentes de PC",
 };
 

@@ -48,8 +48,8 @@ export function AddToCartButton({
 
   if (showQuantitySelector) {
     return (
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-2">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="text-sm text-zinc-600">Cantidad</span>
           <button
             type="button"
@@ -81,7 +81,7 @@ export function AddToCartButton({
             +
           </button>
         </div>
-        <button type="button" disabled={disabled} onClick={handleAdd} className={buttonClassName}>
+        <button type="button" disabled={disabled} onClick={handleAdd} className={`${buttonClassName} w-full justify-center sm:w-auto`}>
           {disabled ? "Sin stock" : added ? "Agregado" : "Agregar al carrito"}
         </button>
       </div>

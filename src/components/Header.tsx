@@ -16,7 +16,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-amber-300/40 bg-gradient-to-r from-amber-200 via-amber-100 to-zinc-950/95 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
             src="/brand/banner.jpeg"
@@ -24,10 +24,10 @@ export function Header() {
             width={260}
             height={56}
             priority
-            className="h-10 w-[260px] object-cover object-[center_-14px] sm:h-12 sm:w-[300px] sm:object-[center_-18px]"
+            className="h-9 w-[220px] object-cover object-[center_-12px] sm:h-12 sm:w-[300px] sm:object-[center_-18px]"
           />
         </Link>
-        <nav className="flex items-center gap-2 text-sm text-zinc-900 sm:gap-3">
+        <nav className="flex w-full flex-wrap items-center justify-center gap-2 text-sm text-zinc-900 sm:w-auto sm:justify-end sm:gap-3">
           <Link
             href="/"
             className={navItemClass(pathname === "/")}

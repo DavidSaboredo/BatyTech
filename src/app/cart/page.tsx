@@ -25,7 +25,7 @@ export default function CartPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <div className="flex flex-col gap-1">
           <h1 className="section-heading text-2xl font-semibold text-amber-300">Carrito</h1>
           <p className="text-sm text-amber-100/90">Revisá cantidades y avanzá al checkout cuando esté todo listo.</p>
@@ -46,7 +46,7 @@ export default function CartPage() {
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="flex flex-col gap-3 lg:col-span-2">
           {items.map((item) => (
-            <div key={item.productId} className="surface-card flex gap-4 rounded-3xl p-4">
+            <div key={item.productId} className="surface-card flex flex-col gap-4 rounded-3xl p-4 sm:flex-row">
               <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl bg-zinc-50">
                 <Image src={item.imageUrl} alt={item.name} fill className="object-contain p-3" />
               </div>
@@ -84,13 +84,13 @@ export default function CartPage() {
                   <button
                     type="button"
                     onClick={() => removeItem(item.productId)}
-                    className="ml-auto text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4"
+                    className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4 sm:ml-auto"
                   >
                     Quitar
                   </button>
                 </div>
               </div>
-              <div className="text-right text-sm font-semibold text-zinc-900">{formatMoney(item.priceCents * item.quantity)}</div>
+              <div className="text-left text-sm font-semibold text-zinc-900 sm:text-right">{formatMoney(item.priceCents * item.quantity)}</div>
             </div>
           ))}
         </div>

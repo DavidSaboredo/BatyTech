@@ -92,7 +92,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
             </option>
           ))}
         </select>
-        <div className="flex items-center gap-2 sm:col-span-5">
+        <div className="flex flex-wrap items-center gap-2 sm:col-span-5">
           <button
             type="submit"
             className="rounded-full border border-zinc-900 bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"
@@ -102,7 +102,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
           <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-500 hover:underline underline-offset-4">
             Limpiar
           </Link>
-          <div className="ml-auto text-sm text-zinc-600">{cards.length} resultados</div>
+          <div className="w-full text-sm text-zinc-600 sm:ml-auto sm:w-auto">{cards.length} resultados</div>
         </div>
       </form>
 

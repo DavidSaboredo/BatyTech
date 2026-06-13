@@ -52,19 +52,19 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             Volver a productos
           </Link>
         </div>
-        <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-600">
-          <Link href="/products" className="hover:text-amber-600 hover:underline underline-offset-4">
+        <div className="flex flex-wrap items-center gap-2 text-sm text-amber-100/85">
+          <Link href="/products" className="hover:text-amber-300 hover:underline underline-offset-4">
             Productos
           </Link>
           <span>/</span>
           <Link
             href={`/products?category=${product.category.slug}`}
-            className="hover:text-amber-600 hover:underline underline-offset-4"
+            className="hover:text-amber-300 hover:underline underline-offset-4"
           >
             {product.category.name}
           </Link>
           <span>/</span>
-          <Link href={`/products?brand=${product.brand.slug}`} className="hover:text-amber-600 hover:underline underline-offset-4">
+          <Link href={`/products?brand=${product.brand.slug}`} className="hover:text-amber-300 hover:underline underline-offset-4">
             {product.brand.name}
           </Link>
         </div>
@@ -75,9 +75,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               Gama {performanceTierLabel}
             </div>
           ) : null}
-          <h1 className="section-heading text-3xl font-semibold tracking-tight text-zinc-950">{product.name}</h1>
-          <div className="text-sm text-zinc-500">SKU: {product.sku}</div>
-          <div className="text-3xl font-semibold text-zinc-950">{formatMoney(product.priceCents)}</div>
+          <h1 className="section-heading text-3xl font-semibold tracking-tight text-amber-300">{product.name}</h1>
+          <div className="text-sm text-amber-100/75">SKU: {product.sku}</div>
+          <div className="text-3xl font-semibold text-amber-200">{formatMoney(product.priceCents)}</div>
         </div>
 
         <div className="surface-card rounded-3xl p-5">

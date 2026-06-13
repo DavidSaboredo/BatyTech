@@ -30,7 +30,7 @@ export function AddToCartButton({
 
   const buttonClassName =
     className ??
-    "inline-flex min-h-11 items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2 text-center text-sm font-semibold leading-tight text-white hover:border-amber-400 hover:text-amber-300 disabled:opacity-40";
+    "inline-flex min-h-10 items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-4 py-2 text-center text-sm font-semibold leading-tight whitespace-nowrap text-white hover:border-amber-400 hover:text-amber-300 disabled:opacity-40";
 
   const handleAdd = () => {
     addItem(

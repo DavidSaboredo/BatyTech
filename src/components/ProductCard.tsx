@@ -54,7 +54,7 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
               imageUrl: product.imageUrl,
               stock: product.stock,
             }}
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-4 py-2.5 text-sm font-semibold leading-tight text-white shadow-sm hover:border-amber-400 hover:bg-zinc-950 hover:text-amber-300 disabled:cursor-not-allowed disabled:opacity-40"
+            className="inline-flex min-h-10 self-start items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2 text-sm font-semibold whitespace-nowrap text-white shadow-sm hover:border-amber-400 hover:bg-zinc-950 hover:text-amber-300 disabled:cursor-not-allowed disabled:opacity-40"
           />
         </div>
       </div>

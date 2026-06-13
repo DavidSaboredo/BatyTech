@@ -45,8 +45,8 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
       ) : null}
 
       <div className="flex flex-col gap-2">
-        <h1 className="section-heading text-3xl font-semibold text-zinc-950">Productos</h1>
-        <p className="muted-copy max-w-2xl text-sm sm:text-base">Filtrá por categoría, marca o buscá por nombre o SKU para encontrar más rápido lo que necesitás.</p>
+        <h1 className="section-heading text-3xl font-semibold text-amber-300">Productos</h1>
+        <p className="max-w-2xl text-sm text-amber-100/90 sm:text-base">Filtrá por categoría, marca o buscá por nombre o SKU para encontrar más rápido lo que necesitás.</p>
       </div>
 
       <form className="surface-card grid gap-3 rounded-3xl p-4 sm:grid-cols-5 sm:p-5">
@@ -99,7 +99,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
           >
             Aplicar
           </button>
-          <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
+          <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-500 hover:underline underline-offset-4">
             Limpiar
           </Link>
           <div className="ml-auto text-sm text-zinc-600">{cards.length} resultados</div>

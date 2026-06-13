@@ -15,7 +15,7 @@ export function Header() {
       : "rounded-full border border-zinc-200 bg-white px-4 py-2 font-medium text-zinc-800 hover:border-amber-400 hover:text-zinc-950";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-zinc-200 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-amber-300/40 bg-gradient-to-r from-amber-200 via-amber-100 to-zinc-950/95 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3">
         <Link href="/" className="flex shrink-0 items-center">
           <Image

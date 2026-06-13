@@ -27,8 +27,8 @@ export default function CartPage() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between gap-4">
         <div className="flex flex-col gap-1">
-          <h1 className="section-heading text-2xl font-semibold text-zinc-950">Carrito</h1>
-          <p className="muted-copy text-sm">Revisá cantidades y avanzá al checkout cuando esté todo listo.</p>
+          <h1 className="section-heading text-2xl font-semibold text-amber-300">Carrito</h1>
+          <p className="text-sm text-amber-100/90">Revisá cantidades y avanzá al checkout cuando esté todo listo.</p>
         </div>
         <button
           type="button"
@@ -37,7 +37,7 @@ export default function CartPage() {
             if (!window.confirm("¿Querés vaciar el carrito?")) return;
             clear();
           }}
-          className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4"
+          className="text-sm text-amber-100/80 hover:text-amber-300 hover:underline underline-offset-4"
         >
           Vaciar
         </button>

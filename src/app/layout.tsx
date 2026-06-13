@@ -31,11 +31,13 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900">
+      <body className="min-h-full flex flex-col text-zinc-900">
         <CartProvider>
           <Header />
-          <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-6 sm:py-8">
-            {children}
+          <main className="metallic-bg w-full flex-1">
+            <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-6 sm:py-8">
+              {children}
+            </div>
           </main>
           <Footer />
         </CartProvider>

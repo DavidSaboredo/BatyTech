@@ -25,9 +25,9 @@ export function Carousel({ slides, intervalMs = 4500 }: { slides: CarouselSlide[
   const slide = safeSlides[index]!;
 
   return (
-    <div className="surface-card relative overflow-hidden rounded-3xl">
-      <Link href={slide.href} className="block">
-        <div className="relative h-56 w-full bg-zinc-50 sm:h-72">
+    <div className="surface-card relative flex h-full flex-col overflow-hidden rounded-3xl">
+      <Link href={slide.href} className="flex h-full flex-col">
+        <div className="relative h-56 w-full flex-1 bg-zinc-50 sm:min-h-[18rem]">
           <Image src={slide.imageUrl} alt={slide.title} fill className="object-contain p-10" priority />
         </div>
         <div className="border-t border-zinc-200 bg-white px-5 py-4">

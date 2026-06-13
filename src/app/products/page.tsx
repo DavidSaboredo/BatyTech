@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
-import { prisma } from "@/lib/db";
 import { performanceTierOptions } from "@/lib/performance-tier";
+import { getCatalogStorefrontData } from "@/lib/storefront-data";
 
 export const dynamic = "force-dynamic";
 
@@ -19,30 +19,12 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const tier = firstString(sp.tier);
   const q = firstString(sp.q)?.trim();
 
-  const [categories, brands, products] = await Promise.all([
-    prisma.category.findMany({ orderBy: { name: "asc" } }),
-    prisma.brand.findMany({ orderBy: { name: "asc" } }),
-    prisma.product.findMany({
-      where: {
-        isActive: true,
-        ...(category ? { category: { slug: category } } : {}),
-        ...(brand ? { brand: { slug: brand } } : {}),
-        ...(tier ? { performanceTier: tier as "ENTRY" | "MID" | "HIGH" } : {}),
-        ...(q
-          ? {
-              OR: [
-                { name: { contains: q } },
-                { description: { contains: q } },
-                { sku: { contains: q } },
-              ],
-            }
-          : {}),
-      },
-      include: { images: { orderBy: { sortOrder: "asc" }, take: 1 } },
-      orderBy: { updatedAt: "desc" },
-      take: 60,
-    }),
-  ]);
+  const { categories, brands, products, usingFallback } = await getCatalogStorefrontData({
+    category,
+    brand,
+    tier,
+    q,
+  });
 
   const cards = products.map((p) => ({
     id: p.id,
@@ -56,6 +38,12 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
   return (
     <div className="flex flex-col gap-8">
+      {usingFallback ? (
+        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          Catálogo de ejemplo visible en local mientras la base de datos no responde.
+        </div>
+      ) : null}
+
       <div className="flex flex-col gap-2">
         <h1 className="section-heading text-3xl font-semibold text-zinc-950">Productos</h1>
         <p className="muted-copy max-w-2xl text-sm sm:text-base">Filtrá por categoría, marca o buscá por nombre o SKU para encontrar más rápido lo que necesitás.</p>

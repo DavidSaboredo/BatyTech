@@ -4,20 +4,13 @@ import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { getPerformanceTierLabel } from "@/lib/performance-tier";
 import { formatMoney } from "@/lib/money";
-import { prisma } from "@/lib/db";
+import { getStorefrontProductBySlug } from "@/lib/storefront-data";
 
 export const dynamic = "force-dynamic";
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const p = await params;
-  const product = await prisma.product.findUnique({
-    where: { slug: p.slug },
-    include: {
-      images: { orderBy: { sortOrder: "asc" } },
-      category: true,
-      brand: true,
-    },
-  });
+  const { product, usingFallback } = await getStorefrontProductBySlug(p.slug);
 
   if (!product || !product.isActive) notFound();
 
@@ -28,19 +21,26 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      <div className="surface-card overflow-hidden rounded-3xl">
-        <div className="relative h-80 w-full bg-zinc-50">
-          <Image src={imageUrl} alt={product.name} fill className="object-contain p-10" priority />
-        </div>
-        {product.images.length > 1 ? (
-          <div className="grid grid-cols-4 gap-2 border-t border-zinc-200 bg-white p-3">
-            {product.images.slice(0, 4).map((img) => (
-              <div key={img.id} className="relative h-16 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
-                <Image src={img.url} alt={img.alt} fill className="object-contain p-4" />
-              </div>
-            ))}
+      <div className="flex flex-col gap-4">
+        {usingFallback ? (
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            Vista local con producto de ejemplo porque la base de datos no está conectada.
           </div>
         ) : null}
+        <div className="surface-card overflow-hidden rounded-3xl">
+          <div className="relative h-80 w-full bg-zinc-50">
+            <Image src={imageUrl} alt={product.name} fill className="object-contain p-10" priority />
+          </div>
+          {product.images.length > 1 ? (
+            <div className="grid grid-cols-4 gap-2 border-t border-zinc-200 bg-white p-3">
+              {product.images.slice(0, 4).map((img) => (
+                <div key={img.id} className="relative h-16 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                  <Image src={img.url} alt={img.alt} fill className="object-contain p-4" />
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
       </div>
 
       <div className="flex flex-col gap-4">

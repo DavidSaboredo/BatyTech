@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { isDatabaseUnavailableError } from "@/lib/database-errors";
 
 type CreateOrderBody = {
   customer: {
@@ -89,6 +90,12 @@ export async function POST(req: Request) {
     }
     if (err instanceof Error && err.message === "insufficient_stock") {
       return Response.json({ error: "Stock insuficiente" }, { status: 409 });
+    }
+    if (isDatabaseUnavailableError(err)) {
+      return Response.json(
+        { error: "La base de datos local no está conectada. Configurá Neon para completar pedidos reales." },
+        { status: 503 },
+      );
     }
     return Response.json({ error: "Error creando la orden" }, { status: 500 });
   }

@@ -38,7 +38,7 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
           {product.name}
         </Link>
         <div className="text-lg font-semibold text-zinc-900">{formatMoney(product.priceCents)}</div>
-        <div className="mt-auto flex items-end justify-between gap-3">
+        <div className="mt-auto flex flex-col gap-3">
           <div className="flex flex-col gap-1">
             <div className="text-[11px] uppercase tracking-wide text-zinc-400">Disponibilidad</div>
             <div className={`inline-flex w-fit rounded-full px-2.5 py-1 text-xs font-medium ${disabled ? "bg-red-50 text-red-600" : "bg-zinc-100 text-zinc-700"}`}>
@@ -54,7 +54,7 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
               imageUrl: product.imageUrl,
               stock: product.stock,
             }}
-            className="rounded-full border border-zinc-900 bg-zinc-900 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:border-amber-400 hover:text-amber-300 disabled:opacity-40"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-4 py-2.5 text-sm font-semibold leading-tight text-white shadow-sm hover:border-amber-400 hover:bg-zinc-950 hover:text-amber-300 disabled:cursor-not-allowed disabled:opacity-40"
           />
         </div>
       </div>

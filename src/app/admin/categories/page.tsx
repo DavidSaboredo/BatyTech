@@ -20,6 +20,21 @@ async function createCategoryAction(formData: FormData) {
   revalidatePath("/admin/categories");
 }
 
+async function updateCategoryAction(formData: FormData) {
+  "use server";
+  await requireAdmin();
+  const id = String(formData.get("id") || "").trim();
+  const name = String(formData.get("name") || "").trim();
+  if (!id || !name) return;
+  const slug = slugify(name);
+  if (!slug) return;
+  await prisma.category.update({
+    where: { id },
+    data: { name, slug },
+  });
+  revalidatePath("/admin/categories");
+}
+
 async function deleteCategoryAction(formData: FormData) {
   "use server";
   await requireAdmin();
@@ -55,20 +70,32 @@ export default async function AdminCategoriesPage() {
         <div className="border-b border-amber-100 px-5 py-3 text-sm font-semibold text-zinc-900">Categorías</div>
         <div className="divide-y">
           {categories.map((c) => (
-            <div key={c.id} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3">
-              <div className="flex flex-col">
-                <div className="font-semibold text-zinc-900">{c.name}</div>
-                <div className="text-xs text-zinc-600">
+            <form key={c.id} action={updateCategoryAction} className="flex flex-wrap items-center gap-3 px-5 py-3">
+              <input type="hidden" name="id" value={c.id} />
+              <div className="min-w-0 flex-1">
+                <input
+                  name="name"
+                  defaultValue={c.name}
+                  className="h-11 w-full rounded-xl border border-zinc-200 px-3 text-sm font-medium text-zinc-900 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                />
+                <div className="mt-1 text-xs text-zinc-600">
                   slug: {c.slug} · productos: {c._count.products}
                 </div>
               </div>
-              <form action={deleteCategoryAction}>
-                <input type="hidden" name="id" value={c.id} />
-                <button type="submit" className="rounded-full border border-zinc-200 px-3 py-1.5 text-sm font-medium hover:bg-zinc-50">
-                  Eliminar
-                </button>
-              </form>
-            </div>
+              <button
+                type="submit"
+                className="rounded-full border border-zinc-900 bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"
+              >
+                Guardar
+              </button>
+              <button
+                type="submit"
+                formAction={deleteCategoryAction}
+                className="rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium hover:bg-zinc-50"
+              >
+                Eliminar
+              </button>
+            </form>
           ))}
           {categories.length === 0 ? (
             <div className="px-5 py-6 text-sm text-zinc-600">No hay categorías todavía.</div>

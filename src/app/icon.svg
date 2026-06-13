@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="48" fill="#0b0b0c"/>
+  <circle cx="128" cy="128" r="86" fill="#ffffff"/>
+  <path d="M62 140c-5-26 7-52 28-66l12-8 10-24 16 18 44-4 14 22 18 10c18 10 29 30 26 50-3 25-24 46-55 50-11 2-21 2-32-1-12-3-24-2-35 1-31 8-58-6-62-28Z" fill="#0b0b0c"/>
+  <ellipse cx="106" cy="138" rx="14" ry="18" fill="#ffffff"/>
+  <ellipse cx="154" cy="138" rx="14" ry="18" fill="#ffffff"/>
+  <circle cx="130" cy="158" r="6" fill="#f59aa8"/>
+  <path d="M108 168c14 10 32 10 46 0" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+  <rect x="56" y="176" width="144" height="48" rx="18" fill="#0b0b0c" stroke="#f6b400" stroke-width="6"/>
+  <text x="96" y="212" font-family="Arial Black, Arial, sans-serif" font-size="36" fill="#ffffff">B</text>
+  <text x="130" y="212" font-family="Arial Black, Arial, sans-serif" font-size="36" fill="#f6b400">T</text>
+</svg>

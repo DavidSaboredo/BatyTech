@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="160" viewBox="0 0 640 160" role="img" aria-label="BatyTech">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0.62" stop-color="#ffffff"/>
+      <stop offset="0.62" stop-color="#f6b400"/>
+      <stop offset="1" stop-color="#f6b400"/>
+    </linearGradient>
+  </defs>
+  <g transform="skewX(-14) translate(30 20)">
+    <path d="M0 10h580l30 50-30 50H0L30 60 0 10Z" fill="#0b0b0c"/>
+    <path d="M0 10h580l30 50-30 50H0L30 60 0 10Z" fill="none" stroke="#000" stroke-width="8"/>
+    <text x="50" y="92" font-family="Arial Black, Arial, sans-serif" font-size="78" fill="url(#g)" letter-spacing="2">
+      BATYSTECH
+    </text>
+  </g>
+</svg>

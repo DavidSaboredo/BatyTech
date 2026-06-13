@@ -1,65 +1,98 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Carousel } from "@/components/Carousel";
+import { ProductCard } from "@/components/ProductCard";
+import { prisma } from "@/lib/db";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const [categories, featured] = await Promise.all([
+    prisma.category.findMany({ orderBy: { name: "asc" } }),
+    prisma.product.findMany({
+      where: { featured: true, isActive: true },
+      include: { images: { orderBy: { sortOrder: "asc" }, take: 1 } },
+      orderBy: { updatedAt: "desc" },
+      take: 8,
+    }),
+  ]);
+
+  const slides = featured.slice(0, 4).map((p) => ({
+    title: p.name,
+    subtitle: "Ver producto",
+    href: `/products/${p.slug}`,
+    imageUrl: p.images[0]?.url || "/window.svg",
+  }));
+
+  const cards = featured.map((p) => ({
+    id: p.id,
+    name: p.name,
+    slug: p.slug,
+    priceCents: p.priceCents,
+    stock: p.stock,
+    imageUrl: p.images[0]?.url || "/window.svg",
+  }));
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex flex-col gap-10">
+      <section className="grid gap-8 lg:grid-cols-2">
+        <div className="flex flex-col justify-center gap-4">
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            Componentes de PC para armar tu setup en BatyTech
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-zinc-600">
+            Procesadores, GPUs, motherboards, memorias, almacenamiento y más. Comprá rápido, fácil y con stock real.
           </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/products"
+              className="rounded-full border border-amber-400 bg-amber-400 px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+            >
+              Ver productos
+            </Link>
+            <Link
+              href="/cart"
+              className="rounded-full border border-zinc-900 bg-white px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-zinc-900 hover:text-white"
+            >
+              Ver carrito
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <Carousel slides={slides} />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-xl font-semibold">Categorías</h2>
+          <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
+            Ver todo
+          </Link>
         </div>
-      </main>
+        <div className="flex flex-wrap gap-2">
+          {categories.map((c) => (
+            <Link
+              key={c.id}
+              href={`/products?category=${c.slug}`}
+              className="rounded-full border border-amber-200 bg-white px-3 py-1.5 text-sm hover:border-amber-300 hover:bg-amber-50"
+            >
+              {c.name}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-xl font-semibold">Destacados</h2>
+          <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
+            Ver más
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {cards.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

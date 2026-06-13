@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BatyTech
 
-## Getting Started
+Tienda online de componentes de PC con:
 
-First, run the development server:
+- catalogo publico
+- carrito y checkout por WhatsApp
+- panel privado de administracion
+- carga de imagenes via Cloudinary
+- base de datos con Prisma + PostgreSQL
+
+## Stack
+
+- Next.js 16
+- React 19
+- Tailwind CSS 4
+- Prisma 7
+- PostgreSQL
+
+## Desarrollo local
+
+1. Copia `.env.example` a `.env`
+2. Configura una base PostgreSQL
+3. Instala dependencias
+4. Aplica migraciones
+5. Ejecuta seed
+6. Levanta el proyecto
+
+```bash
+npm install
+npm run db:deploy
+npm run db:seed
+npm run dev
+```
+
+## Variables de entorno
+
+Estas variables son necesarias:
+
+```env
+DATABASE_URL=
+AUTH_SECRET=
+NEXT_PUBLIC_WHATSAPP_NUMBER=
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=
+NEXT_PUBLIC_CLOUDINARY_FOLDER=
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
+```
+
+## Deploy en Vercel
+
+En la pantalla de importacion del proyecto:
+
+- `Framework Preset`: `Next.js`
+- `Root Directory`: `batytech`
+- `Build Command`: dejar por defecto
+- `Install Command`: dejar por defecto
+
+Antes de hacer el primer deploy:
+
+1. Crea una base PostgreSQL
+2. Carga `DATABASE_URL` en Vercel
+3. Carga `AUTH_SECRET`
+4. Carga variables de Cloudinary
+5. Carga `ADMIN_EMAIL` y `ADMIN_PASSWORD`
+
+Luego del primer deploy, corre:
+
+```bash
+npm run db:deploy
+npm run db:seed
+```
+
+Si usas Vercel + Neon:
+
+- usa la URL de PostgreSQL en `DATABASE_URL`
+- para este proyecto no hace falta una infra grande
+- con trafico bajo o moderado funciona bien
+
+## Acceso admin
+
+- Login privado: `/ingreso-batytech`
+- Panel admin: `/gestion-batytech`
+
+## Comandos utiles
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run build
+npm run db:generate
+npm run db:deploy
+npm run db:migrate
+npm run db:seed
+npm run db:studio
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

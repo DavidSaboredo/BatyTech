@@ -29,7 +29,12 @@ function slugify(input: string) {
     .replace(/(^-|-$)/g, "");
 }
 
-const connectionString = process.env.DATABASE_URL;
+const connectionString =
+  process.env.POSTGRES_PRISMA_URL ||
+  process.env.DATABASE_URL ||
+  process.env.DATABASE_URL_UNPOOLED ||
+  process.env.POSTGRES_URL_NON_POOLING ||
+  process.env.POSTGRES_URL;
 
 if (!connectionString) {
   throw new Error("DATABASE_URL no esta configurada");

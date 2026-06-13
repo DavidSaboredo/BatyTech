@@ -41,9 +41,12 @@ export type ProductMinAggregateOutputType = {
   name: string | null
   slug: string | null
   description: string | null
+  specs: string | null
+  fpsGames: string | null
   sku: string | null
   priceCents: number | null
   stock: number | null
+  performanceTier: $Enums.PerformanceTier | null
   featured: boolean | null
   isActive: boolean | null
   categoryId: string | null
@@ -57,9 +60,12 @@ export type ProductMaxAggregateOutputType = {
   name: string | null
   slug: string | null
   description: string | null
+  specs: string | null
+  fpsGames: string | null
   sku: string | null
   priceCents: number | null
   stock: number | null
+  performanceTier: $Enums.PerformanceTier | null
   featured: boolean | null
   isActive: boolean | null
   categoryId: string | null
@@ -73,9 +79,12 @@ export type ProductCountAggregateOutputType = {
   name: number
   slug: number
   description: number
+  specs: number
+  fpsGames: number
   sku: number
   priceCents: number
   stock: number
+  performanceTier: number
   featured: number
   isActive: number
   categoryId: number
@@ -101,9 +110,12 @@ export type ProductMinAggregateInputType = {
   name?: true
   slug?: true
   description?: true
+  specs?: true
+  fpsGames?: true
   sku?: true
   priceCents?: true
   stock?: true
+  performanceTier?: true
   featured?: true
   isActive?: true
   categoryId?: true
@@ -117,9 +129,12 @@ export type ProductMaxAggregateInputType = {
   name?: true
   slug?: true
   description?: true
+  specs?: true
+  fpsGames?: true
   sku?: true
   priceCents?: true
   stock?: true
+  performanceTier?: true
   featured?: true
   isActive?: true
   categoryId?: true
@@ -133,9 +148,12 @@ export type ProductCountAggregateInputType = {
   name?: true
   slug?: true
   description?: true
+  specs?: true
+  fpsGames?: true
   sku?: true
   priceCents?: true
   stock?: true
+  performanceTier?: true
   featured?: true
   isActive?: true
   categoryId?: true
@@ -236,9 +254,12 @@ export type ProductGroupByOutputType = {
   name: string
   slug: string
   description: string
+  specs: string | null
+  fpsGames: string | null
   sku: string
   priceCents: number
   stock: number
+  performanceTier: $Enums.PerformanceTier | null
   featured: boolean
   isActive: boolean
   categoryId: string
@@ -275,9 +296,12 @@ export type ProductWhereInput = {
   name?: Prisma.StringFilter<"Product"> | string
   slug?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
+  specs?: Prisma.StringNullableFilter<"Product"> | string | null
+  fpsGames?: Prisma.StringNullableFilter<"Product"> | string | null
   sku?: Prisma.StringFilter<"Product"> | string
   priceCents?: Prisma.IntFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  performanceTier?: Prisma.EnumPerformanceTierNullableFilter<"Product"> | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFilter<"Product"> | boolean
   isActive?: Prisma.BoolFilter<"Product"> | boolean
   categoryId?: Prisma.StringFilter<"Product"> | string
@@ -295,9 +319,12 @@ export type ProductOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  specs?: Prisma.SortOrderInput | Prisma.SortOrder
+  fpsGames?: Prisma.SortOrderInput | Prisma.SortOrder
   sku?: Prisma.SortOrder
   priceCents?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  performanceTier?: Prisma.SortOrderInput | Prisma.SortOrder
   featured?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -319,8 +346,11 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   name?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
+  specs?: Prisma.StringNullableFilter<"Product"> | string | null
+  fpsGames?: Prisma.StringNullableFilter<"Product"> | string | null
   priceCents?: Prisma.IntFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  performanceTier?: Prisma.EnumPerformanceTierNullableFilter<"Product"> | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFilter<"Product"> | boolean
   isActive?: Prisma.BoolFilter<"Product"> | boolean
   categoryId?: Prisma.StringFilter<"Product"> | string
@@ -338,9 +368,12 @@ export type ProductOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  specs?: Prisma.SortOrderInput | Prisma.SortOrder
+  fpsGames?: Prisma.SortOrderInput | Prisma.SortOrder
   sku?: Prisma.SortOrder
   priceCents?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  performanceTier?: Prisma.SortOrderInput | Prisma.SortOrder
   featured?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -362,9 +395,12 @@ export type ProductScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Product"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Product"> | string
   description?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  specs?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  fpsGames?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   sku?: Prisma.StringWithAggregatesFilter<"Product"> | string
   priceCents?: Prisma.IntWithAggregatesFilter<"Product"> | number
   stock?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  performanceTier?: Prisma.EnumPerformanceTierNullableWithAggregatesFilter<"Product"> | $Enums.PerformanceTier | null
   featured?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   isActive?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   categoryId?: Prisma.StringWithAggregatesFilter<"Product"> | string
@@ -378,9 +414,12 @@ export type ProductCreateInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   createdAt?: Date | string
@@ -396,9 +435,12 @@ export type ProductUncheckedCreateInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   categoryId: string
@@ -414,9 +456,12 @@ export type ProductUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -432,9 +477,12 @@ export type ProductUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -450,9 +498,12 @@ export type ProductCreateManyInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   categoryId: string
@@ -466,9 +517,12 @@ export type ProductUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -480,9 +534,12 @@ export type ProductUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -506,9 +563,12 @@ export type ProductCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  specs?: Prisma.SortOrder
+  fpsGames?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   priceCents?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  performanceTier?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -527,9 +587,12 @@ export type ProductMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  specs?: Prisma.SortOrder
+  fpsGames?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   priceCents?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  performanceTier?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -543,9 +606,12 @@ export type ProductMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  specs?: Prisma.SortOrder
+  fpsGames?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   priceCents?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  performanceTier?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -648,12 +714,20 @@ export type ProductUncheckedUpdateManyWithoutBrandNestedInput = {
   deleteMany?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type NullableEnumPerformanceTierFieldUpdateOperationsInput = {
+  set?: $Enums.PerformanceTier | null
 }
 
 export type BoolFieldUpdateOperationsInput = {
@@ -693,9 +767,12 @@ export type ProductCreateWithoutCategoryInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   createdAt?: Date | string
@@ -710,9 +787,12 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   brandId: string
@@ -756,9 +836,12 @@ export type ProductScalarWhereInput = {
   name?: Prisma.StringFilter<"Product"> | string
   slug?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
+  specs?: Prisma.StringNullableFilter<"Product"> | string | null
+  fpsGames?: Prisma.StringNullableFilter<"Product"> | string | null
   sku?: Prisma.StringFilter<"Product"> | string
   priceCents?: Prisma.IntFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  performanceTier?: Prisma.EnumPerformanceTierNullableFilter<"Product"> | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFilter<"Product"> | boolean
   isActive?: Prisma.BoolFilter<"Product"> | boolean
   categoryId?: Prisma.StringFilter<"Product"> | string
@@ -772,9 +855,12 @@ export type ProductCreateWithoutBrandInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   createdAt?: Date | string
@@ -789,9 +875,12 @@ export type ProductUncheckedCreateWithoutBrandInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   categoryId: string
@@ -832,9 +921,12 @@ export type ProductCreateWithoutImagesInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   createdAt?: Date | string
@@ -849,9 +941,12 @@ export type ProductUncheckedCreateWithoutImagesInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   categoryId: string
@@ -882,9 +977,12 @@ export type ProductUpdateWithoutImagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -899,9 +997,12 @@ export type ProductUncheckedUpdateWithoutImagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -916,9 +1017,12 @@ export type ProductCreateWithoutOrderItemsInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   createdAt?: Date | string
@@ -933,9 +1037,12 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   categoryId: string
@@ -966,9 +1073,12 @@ export type ProductUpdateWithoutOrderItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -983,9 +1093,12 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1000,9 +1113,12 @@ export type ProductCreateManyCategoryInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   brandId: string
@@ -1015,9 +1131,12 @@ export type ProductUpdateWithoutCategoryInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1032,9 +1151,12 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   brandId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1049,9 +1171,12 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   brandId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1064,9 +1189,12 @@ export type ProductCreateManyBrandInput = {
   name: string
   slug: string
   description: string
+  specs?: string | null
+  fpsGames?: string | null
   sku: string
   priceCents: number
   stock?: number
+  performanceTier?: $Enums.PerformanceTier | null
   featured?: boolean
   isActive?: boolean
   categoryId: string
@@ -1079,9 +1207,12 @@ export type ProductUpdateWithoutBrandInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1096,9 +1227,12 @@ export type ProductUncheckedUpdateWithoutBrandInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1113,9 +1247,12 @@ export type ProductUncheckedUpdateManyWithoutBrandInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fpsGames?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   priceCents?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  performanceTier?: Prisma.NullableEnumPerformanceTierFieldUpdateOperationsInput | $Enums.PerformanceTier | null
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1168,9 +1305,12 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name?: boolean
   slug?: boolean
   description?: boolean
+  specs?: boolean
+  fpsGames?: boolean
   sku?: boolean
   priceCents?: boolean
   stock?: boolean
+  performanceTier?: boolean
   featured?: boolean
   isActive?: boolean
   categoryId?: boolean
@@ -1189,9 +1329,12 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   slug?: boolean
   description?: boolean
+  specs?: boolean
+  fpsGames?: boolean
   sku?: boolean
   priceCents?: boolean
   stock?: boolean
+  performanceTier?: boolean
   featured?: boolean
   isActive?: boolean
   categoryId?: boolean
@@ -1207,9 +1350,12 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   slug?: boolean
   description?: boolean
+  specs?: boolean
+  fpsGames?: boolean
   sku?: boolean
   priceCents?: boolean
   stock?: boolean
+  performanceTier?: boolean
   featured?: boolean
   isActive?: boolean
   categoryId?: boolean
@@ -1225,9 +1371,12 @@ export type ProductSelectScalar = {
   name?: boolean
   slug?: boolean
   description?: boolean
+  specs?: boolean
+  fpsGames?: boolean
   sku?: boolean
   priceCents?: boolean
   stock?: boolean
+  performanceTier?: boolean
   featured?: boolean
   isActive?: boolean
   categoryId?: boolean
@@ -1236,7 +1385,7 @@ export type ProductSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "sku" | "priceCents" | "stock" | "featured" | "isActive" | "categoryId" | "brandId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "specs" | "fpsGames" | "sku" | "priceCents" | "stock" | "performanceTier" | "featured" | "isActive" | "categoryId" | "brandId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
@@ -1266,9 +1415,12 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     name: string
     slug: string
     description: string
+    specs: string | null
+    fpsGames: string | null
     sku: string
     priceCents: number
     stock: number
+    performanceTier: $Enums.PerformanceTier | null
     featured: boolean
     isActive: boolean
     categoryId: string
@@ -1706,9 +1858,12 @@ export interface ProductFieldRefs {
   readonly name: Prisma.FieldRef<"Product", 'String'>
   readonly slug: Prisma.FieldRef<"Product", 'String'>
   readonly description: Prisma.FieldRef<"Product", 'String'>
+  readonly specs: Prisma.FieldRef<"Product", 'String'>
+  readonly fpsGames: Prisma.FieldRef<"Product", 'String'>
   readonly sku: Prisma.FieldRef<"Product", 'String'>
   readonly priceCents: Prisma.FieldRef<"Product", 'Int'>
   readonly stock: Prisma.FieldRef<"Product", 'Int'>
+  readonly performanceTier: Prisma.FieldRef<"Product", 'PerformanceTier'>
   readonly featured: Prisma.FieldRef<"Product", 'Boolean'>
   readonly isActive: Prisma.FieldRef<"Product", 'Boolean'>
   readonly categoryId: Prisma.FieldRef<"Product", 'String'>

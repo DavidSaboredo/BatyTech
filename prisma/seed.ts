@@ -29,6 +29,21 @@ function slugify(input: string) {
     .replace(/(^-|-$)/g, "");
 }
 
+type SeedProduct = {
+  name: string;
+  sku: string;
+  priceCents: number;
+  stock: number;
+  category: string;
+  brand: string;
+  featured: boolean;
+  performanceTier: "ENTRY" | "MID" | "HIGH" | null;
+  description: string;
+  specs: string | null;
+  fpsGames: string | null;
+  images: { url: string; alt: string }[];
+};
+
 const connectionString =
   process.env.POSTGRES_PRISMA_URL ||
   process.env.DATABASE_URL ||
@@ -59,6 +74,7 @@ async function main() {
   });
 
   const categoryNames = [
+    "PC Armadas",
     "Procesadores",
     "Placas de video",
     "Motherboards",
@@ -70,6 +86,7 @@ async function main() {
   ];
 
   const brandNames = [
+    "BatyTech",
     "AMD",
     "Intel",
     "NVIDIA",
@@ -104,7 +121,58 @@ async function main() {
     });
   }
 
-  const products = [
+  const products: SeedProduct[] = [
+    {
+      name: "PC Gamer Entrada Ryzen 5 + RTX 4060",
+      sku: "PC-ENTRY-R5-4060",
+      priceCents: 1499999,
+      stock: 6,
+      category: "pc-armadas",
+      brand: "batytech",
+      featured: true,
+      performanceTier: "ENTRY",
+      description:
+        "PC gamer equilibrada para jugar en 1080p con buen rendimiento en esports y AAA actuales.",
+      specs:
+        "AMD Ryzen 5 5600\nNVIDIA GeForce RTX 4060 8GB\n16GB DDR4 3200\nSSD NVMe 1TB\nFuente 650W 80+ Bronze",
+      fpsGames:
+        "Counter-Strike 2: 220+ FPS en 1080p competitivo\nFortnite: 140 FPS en 1080p alto\nWarzone: 95 FPS en 1080p balanceado\nGTA V Enhanced: 120 FPS en 1080p muy alto",
+      images: [{ url: "/demo/pc-build.svg", alt: "PC Gamer Entrada" }],
+    },
+    {
+      name: "PC Gamer Media Ryzen 7 + RTX 4070 Super",
+      sku: "PC-MID-R7-4070S",
+      priceCents: 2399999,
+      stock: 4,
+      category: "pc-armadas",
+      brand: "batytech",
+      featured: true,
+      performanceTier: "MID",
+      description:
+        "PC orientada a 1440p de alta calidad para gaming competitivo y títulos AAA con excelente fluidez.",
+      specs:
+        "AMD Ryzen 7 7700\nNVIDIA GeForce RTX 4070 Super 12GB\n32GB DDR5 6000\nSSD NVMe 1TB\nRefrigeracion por aire premium",
+      fpsGames:
+        "Counter-Strike 2: 300+ FPS en 1080p competitivo\nFortnite: 200 FPS en 1440p alto\nWarzone: 140 FPS en 1440p balanceado\nCyberpunk 2077: 95 FPS en 1440p alto con DLSS",
+      images: [{ url: "/demo/pc-build.svg", alt: "PC Gamer Media" }],
+    },
+    {
+      name: "PC Gamer Alta Ryzen 7 + RTX 4080 Super",
+      sku: "PC-HIGH-R7-4080S",
+      priceCents: 3699999,
+      stock: 2,
+      category: "pc-armadas",
+      brand: "batytech",
+      featured: true,
+      performanceTier: "HIGH",
+      description:
+        "Equipo de alta gama para 1440p ultra y 4K, pensado para jugar lo mas pesado con margen de sobra.",
+      specs:
+        "AMD Ryzen 7 7800X3D\nNVIDIA GeForce RTX 4080 Super 16GB\n32GB DDR5 6000\nSSD NVMe 2TB\nFuente 850W Gold",
+      fpsGames:
+        "Counter-Strike 2: 400+ FPS en 1080p competitivo\nFortnite: 240 FPS en 1440p épico\nWarzone: 190 FPS en 1440p competitivo\nBlack Myth Wukong: 90 FPS en 4K alto con DLSS",
+      images: [{ url: "/demo/pc-build.svg", alt: "PC Gamer Alta" }],
+    },
     {
       name: "AMD Ryzen 5 5600",
       sku: "CPU-RYZEN5-5600",
@@ -113,9 +181,12 @@ async function main() {
       category: "procesadores",
       brand: "amd",
       featured: true,
+      performanceTier: null,
       description:
         "Procesador 6 núcleos / 12 hilos ideal para gaming y productividad. Excelente relación precio/rendimiento.",
-      images: [{ url: "/window.svg", alt: "AMD Ryzen 5 5600" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/cpu.svg", alt: "AMD Ryzen 5 5600" }],
     },
     {
       name: "Intel Core i5 12400F",
@@ -125,9 +196,12 @@ async function main() {
       category: "procesadores",
       brand: "intel",
       featured: true,
+      performanceTier: null,
       description:
         "6 núcleos / 12 hilos con gran desempeño en juegos. Requiere GPU dedicada.",
-      images: [{ url: "/window.svg", alt: "Intel Core i5 12400F" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/cpu.svg", alt: "Intel Core i5 12400F" }],
     },
     {
       name: "NVIDIA GeForce RTX 4060 8GB",
@@ -137,9 +211,12 @@ async function main() {
       category: "placas-de-video",
       brand: "nvidia",
       featured: true,
+      performanceTier: null,
       description:
         "GPU eficiente para 1080p/1440p, con soporte para tecnologías modernas de renderizado.",
-      images: [{ url: "/globe.svg", alt: "RTX 4060" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/gpu.svg", alt: "RTX 4060" }],
     },
     {
       name: "MSI B550M PRO-VDH WiFi",
@@ -149,9 +226,12 @@ async function main() {
       category: "motherboards",
       brand: "msi",
       featured: false,
+      performanceTier: null,
       description:
         "Motherboard AM4 con buen VRM, conectividad WiFi y compatibilidad con Ryzen 3000/5000.",
-      images: [{ url: "/file.svg", alt: "MSI B550M" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/motherboard.svg", alt: "MSI B550M" }],
     },
     {
       name: "ASUS PRIME B760M-A",
@@ -161,9 +241,12 @@ async function main() {
       category: "motherboards",
       brand: "asus",
       featured: false,
+      performanceTier: null,
       description:
         "Motherboard LGA1700 para Intel 12/13/14th gen, ideal para armado equilibrado.",
-      images: [{ url: "/file.svg", alt: "ASUS PRIME B760M-A" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/motherboard.svg", alt: "ASUS PRIME B760M-A" }],
     },
     {
       name: "Kingston Fury 16GB (2x8) DDR4 3200",
@@ -173,8 +256,11 @@ async function main() {
       category: "memorias-ram",
       brand: "kingston",
       featured: true,
+      performanceTier: null,
       description: "Kit dual channel DDR4 3200MHz para gaming y multitarea.",
-      images: [{ url: "/next.svg", alt: "Kingston Fury DDR4" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/ram.svg", alt: "Kingston Fury DDR4" }],
     },
     {
       name: "Corsair Vengeance 32GB (2x16) DDR5 6000",
@@ -184,9 +270,12 @@ async function main() {
       category: "memorias-ram",
       brand: "corsair",
       featured: false,
+      performanceTier: null,
       description:
         "DDR5 de alto rendimiento para plataformas modernas. Excelente para productividad y juegos.",
-      images: [{ url: "/next.svg", alt: "Corsair Vengeance DDR5" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/ram.svg", alt: "Corsair Vengeance DDR5" }],
     },
     {
       name: "Samsung 990 EVO 1TB NVMe",
@@ -196,9 +285,12 @@ async function main() {
       category: "almacenamiento",
       brand: "samsung",
       featured: true,
+      performanceTier: null,
       description:
         "SSD NVMe 1TB rápido para sistema y juegos. Mejora los tiempos de carga.",
-      images: [{ url: "/vercel.svg", alt: "Samsung 990 EVO" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/storage.svg", alt: "Samsung 990 EVO" }],
     },
     {
       name: "Cooler Master MWE 650W 80+ Bronze",
@@ -208,9 +300,12 @@ async function main() {
       category: "fuentes",
       brand: "cooler-master",
       featured: false,
+      performanceTier: null,
       description:
         "Fuente 650W 80+ Bronze para builds de gama media, con buena eficiencia.",
-      images: [{ url: "/vercel.svg", alt: "Cooler Master 650W" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/psu.svg", alt: "Cooler Master 650W" }],
     },
     {
       name: "Gabinete Mid Tower con vidrio templado",
@@ -220,9 +315,12 @@ async function main() {
       category: "gabinetes",
       brand: "cooler-master",
       featured: false,
+      performanceTier: null,
       description:
         "Gabinete con buen airflow y panel lateral de vidrio templado para tu setup.",
-      images: [{ url: "/window.svg", alt: "Gabinete Mid Tower" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/case.svg", alt: "Gabinete Mid Tower" }],
     },
     {
       name: "Cooler CPU Torre 120mm",
@@ -232,9 +330,12 @@ async function main() {
       category: "refrigeracion",
       brand: "cooler-master",
       featured: false,
+      performanceTier: null,
       description:
         "Disipador tipo torre 120mm para mantener bajas temperaturas en CPUs populares.",
-      images: [{ url: "/globe.svg", alt: "Cooler CPU Torre" }],
+      specs: null,
+      fpsGames: null,
+      images: [{ url: "/demo/cooling.svg", alt: "Cooler CPU Torre" }],
     },
   ];
 
@@ -249,8 +350,11 @@ async function main() {
         name: p.name,
         slug,
         description: p.description,
+        specs: p.specs,
+        fpsGames: p.fpsGames,
         priceCents: p.priceCents,
         stock: p.stock,
+        performanceTier: p.performanceTier,
         categoryId: category.id,
         brandId: brand.id,
         featured: p.featured,
@@ -260,9 +364,12 @@ async function main() {
         name: p.name,
         slug,
         description: p.description,
+        specs: p.specs,
+        fpsGames: p.fpsGames,
         sku: p.sku,
         priceCents: p.priceCents,
         stock: p.stock,
+        performanceTier: p.performanceTier,
         categoryId: category.id,
         brandId: brand.id,
         featured: p.featured,

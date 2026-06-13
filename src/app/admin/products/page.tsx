@@ -2,6 +2,7 @@ import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { ownerAdminPath, requireAdmin } from "@/lib/admin";
+import { getPerformanceTierLabel } from "@/lib/performance-tier";
 import { formatMoney } from "@/lib/money";
 
 export const dynamic = "force-dynamic";
@@ -53,6 +54,7 @@ export default async function AdminProductsPage() {
                 <div className="font-semibold text-zinc-900">{p.name}</div>
                 <div className="text-xs text-zinc-600">
                   {p.sku} · {p.isActive ? "Activo" : "Inactivo"} · {p.featured ? "Destacado" : "Normal"}
+                  {p.performanceTier ? ` · Gama ${getPerformanceTierLabel(p.performanceTier)}` : ""}
                 </div>
               </div>
               <div className="col-span-2 text-zinc-700">{p.category.name}</div>

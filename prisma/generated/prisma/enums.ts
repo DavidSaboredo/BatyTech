@@ -25,3 +25,12 @@ export const OrderStatus = {
 } as const
 
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const PerformanceTier = {
+  ENTRY: 'ENTRY',
+  MID: 'MID',
+  HIGH: 'HIGH'
+} as const
+
+export type PerformanceTier = (typeof PerformanceTier)[keyof typeof PerformanceTier]

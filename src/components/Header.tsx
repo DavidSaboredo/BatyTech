@@ -2,10 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
 
 export function Header() {
   const { totalQuantity } = useCart();
+  const pathname = usePathname();
+
+  const navItemClass = (active: boolean) =>
+    active
+      ? "rounded-full border border-zinc-900 bg-zinc-900 px-4 py-2 font-medium text-white shadow-sm"
+      : "rounded-full border border-zinc-200 bg-white px-4 py-2 font-medium text-zinc-800 hover:border-amber-400 hover:text-zinc-950";
 
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-200 bg-white/95 backdrop-blur">
@@ -23,19 +30,19 @@ export function Header() {
         <nav className="flex items-center gap-2 text-sm text-zinc-900 sm:gap-3">
           <Link
             href="/"
-            className="rounded-full px-3 py-2 font-medium hover:bg-amber-50 hover:text-zinc-950"
+            className={navItemClass(pathname === "/")}
           >
             Inicio
           </Link>
           <Link
             href="/products"
-            className="rounded-full px-3 py-2 font-medium hover:bg-amber-50 hover:text-zinc-950"
+            className={navItemClass(pathname === "/products" || pathname.startsWith("/products/"))}
           >
             Productos
           </Link>
           <Link
             href="/cart"
-            className="rounded-full border border-zinc-900 bg-zinc-900 px-3 py-2 font-medium text-white shadow-sm hover:border-amber-400 hover:text-amber-300"
+            className={navItemClass(pathname === "/cart" || pathname === "/checkout")}
             aria-label="Carrito"
           >
             Carrito ({totalQuantity})

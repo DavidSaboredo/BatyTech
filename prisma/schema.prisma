@@ -19,6 +19,12 @@ enum OrderStatus {
   CANCELLED
 }
 
+enum PerformanceTier {
+  ENTRY
+  MID
+  HIGH
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -51,9 +57,12 @@ model Product {
   name        String
   slug        String         @unique
   description String
+  specs       String?
+  fpsGames    String?
   sku         String         @unique
   priceCents  Int
   stock       Int            @default(0)
+  performanceTier PerformanceTier?
   featured    Boolean        @default(false)
   isActive    Boolean        @default(true)
   categoryId  String

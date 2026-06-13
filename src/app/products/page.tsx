@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
 import { prisma } from "@/lib/db";
+import { performanceTierOptions } from "@/lib/performance-tier";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const sp = await searchParams;
   const category = firstString(sp.category);
   const brand = firstString(sp.brand);
+  const tier = firstString(sp.tier);
   const q = firstString(sp.q)?.trim();
 
   const [categories, brands, products] = await Promise.all([
@@ -25,6 +27,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         isActive: true,
         ...(category ? { category: { slug: category } } : {}),
         ...(brand ? { brand: { slug: brand } } : {}),
+        ...(tier ? { performanceTier: tier as "ENTRY" | "MID" | "HIGH" } : {}),
         ...(q
           ? {
               OR: [
@@ -48,6 +51,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     priceCents: p.priceCents,
     stock: p.stock,
     imageUrl: p.images[0]?.url || "/window.svg",
+    performanceTier: p.performanceTier,
   }));
 
   return (
@@ -57,7 +61,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         <p className="muted-copy max-w-2xl text-sm sm:text-base">Filtrá por categoría, marca o buscá por nombre o SKU para encontrar más rápido lo que necesitás.</p>
       </div>
 
-      <form className="surface-card grid gap-3 rounded-3xl p-4 sm:grid-cols-4 sm:p-5">
+      <form className="surface-card grid gap-3 rounded-3xl p-4 sm:grid-cols-5 sm:p-5">
         <input
           name="q"
           defaultValue={q}
@@ -88,7 +92,19 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
             </option>
           ))}
         </select>
-        <div className="flex items-center gap-2 sm:col-span-4">
+        <select
+          name="tier"
+          defaultValue={tier || ""}
+          className="h-11 rounded-xl border border-zinc-200 bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+        >
+          <option value="">Todas las gamas</option>
+          {performanceTierOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <div className="flex items-center gap-2 sm:col-span-5">
           <button
             type="submit"
             className="rounded-full border border-zinc-900 bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"

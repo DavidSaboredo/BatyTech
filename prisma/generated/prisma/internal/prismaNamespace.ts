@@ -1006,9 +1006,12 @@ export const ProductScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   description: 'description',
+  specs: 'specs',
+  fpsGames: 'fpsGames',
   sku: 'sku',
   priceCents: 'priceCents',
   stock: 'stock',
+  performanceTier: 'performanceTier',
   featured: 'featured',
   isActive: 'isActive',
   categoryId: 'categoryId',
@@ -1142,6 +1145,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PerformanceTier'
+ */
+export type EnumPerformanceTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PerformanceTier'>
+    
+
+
+/**
+ * Reference to a field of type 'PerformanceTier[]'
+ */
+export type ListEnumPerformanceTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PerformanceTier[]'>
     
 
 

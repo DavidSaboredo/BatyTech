@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { ownerAdminPath, requireAdmin } from "@/lib/admin";
+import { performanceTierOptions } from "@/lib/performance-tier";
 import { slugify } from "@/lib/slug";
 import { ImageUpload } from "@/components/ImageUpload";
 
@@ -10,6 +11,11 @@ export const dynamic = "force-dynamic";
 function toInt(value: FormDataEntryValue | null, fallback: number) {
   const n = Math.floor(Number(value));
   return Number.isFinite(n) ? n : fallback;
+}
+
+function toPerformanceTier(value: FormDataEntryValue | null) {
+  const tier = String(value || "").trim();
+  return tier === "ENTRY" || tier === "MID" || tier === "HIGH" ? tier : null;
 }
 
 async function updateProductAction(formData: FormData) {
@@ -23,6 +29,9 @@ async function updateProductAction(formData: FormData) {
   const stock = toInt(formData.get("stock"), 0);
   const categoryId = String(formData.get("categoryId") || "").trim();
   const brandId = String(formData.get("brandId") || "").trim();
+  const performanceTier = toPerformanceTier(formData.get("performanceTier"));
+  const specs = String(formData.get("specs") || "").trim() || null;
+  const fpsGames = String(formData.get("fpsGames") || "").trim() || null;
   const imageUrl = String(formData.get("imageUrl") || "").trim() || "/window.svg";
   const featured = formData.get("featured") === "on";
   const isActive = formData.get("isActive") === "on";
@@ -42,6 +51,9 @@ async function updateProductAction(formData: FormData) {
       stock,
       categoryId,
       brandId,
+      performanceTier,
+      specs,
+      fpsGames,
       featured,
       isActive,
       images: {
@@ -163,6 +175,21 @@ export default async function AdminEditProductPage({ params }: { params: Promise
               ))}
             </select>
           </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium">Gama de PC</label>
+            <select
+              name="performanceTier"
+              defaultValue={product.performanceTier || ""}
+              className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            >
+              <option value="">Sin definir</option>
+              {performanceTierOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <ImageUpload name="imageUrl" defaultValue={product.images[0]?.url || "/window.svg"} label="Imagen" />
@@ -176,6 +203,27 @@ export default async function AdminEditProductPage({ params }: { params: Promise
             defaultValue={product.description}
             className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
           />
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium">Características</label>
+            <textarea
+              name="specs"
+              rows={6}
+              defaultValue={product.specs || ""}
+              className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium">FPS en juegos actuales</label>
+            <textarea
+              name="fpsGames"
+              rows={6}
+              defaultValue={product.fpsGames || ""}
+              className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            />
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-4">

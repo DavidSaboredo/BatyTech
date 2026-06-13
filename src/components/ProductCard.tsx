@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AddToCartButton } from "@/components/AddToCartButton";
+import { getPerformanceTierLabel } from "@/lib/performance-tier";
 import { formatMoney } from "@/lib/money";
 
 export type ProductCardModel = {
@@ -12,10 +13,12 @@ export type ProductCardModel = {
   priceCents: number;
   stock: number;
   imageUrl: string;
+  performanceTier?: string | null;
 };
 
 export function ProductCard({ product }: { product: ProductCardModel }) {
   const disabled = product.stock <= 0;
+  const performanceTierLabel = getPerformanceTierLabel(product.performanceTier);
 
   return (
     <div className="surface-card flex h-full flex-col overflow-hidden rounded-3xl">
@@ -26,6 +29,11 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
         </div>
       </Link>
       <div className="flex flex-1 flex-col gap-3 p-4">
+        {performanceTierLabel ? (
+          <div className="inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-amber-700">
+            Gama {performanceTierLabel}
+          </div>
+        ) : null}
         <Link href={`/products/${product.slug}`} className="line-clamp-2 min-h-12 text-base font-semibold leading-6 hover:text-amber-700">
           {product.name}
         </Link>

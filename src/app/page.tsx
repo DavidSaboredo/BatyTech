@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Carousel } from "@/components/Carousel";
 import { ProductCard } from "@/components/ProductCard";
 import { prisma } from "@/lib/db";
+import { performanceTierOptions } from "@/lib/performance-tier";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +31,7 @@ export default async function Home() {
     priceCents: p.priceCents,
     stock: p.stock,
     imageUrl: p.images[0]?.url || "/window.svg",
+    performanceTier: p.performanceTier,
   }));
 
   return (
@@ -80,43 +82,65 @@ export default async function Home() {
         <Carousel slides={slides} />
       </section>
 
-      <section className="flex flex-col gap-4">
-        <div className="flex items-end justify-between gap-4">
-          <div className="flex flex-col gap-1">
-            <h2 className="section-heading text-2xl font-semibold text-zinc-950">Categorías</h2>
-            <p className="muted-copy text-sm">Entrá directo a la parte del catálogo que te interesa.</p>
+      <section className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
+        <aside className="flex flex-col gap-5 lg:sticky lg:top-24">
+          <div className="surface-card rounded-3xl p-5">
+            <div className="flex items-end justify-between gap-3">
+              <div className="flex flex-col gap-1">
+                <h2 className="section-heading text-2xl font-semibold text-zinc-950">Categorías</h2>
+                <p className="muted-copy text-sm">Entrá directo a lo que buscás.</p>
+              </div>
+              <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
+                Ver todo
+              </Link>
+            </div>
+            <div className="mt-4 flex flex-col gap-2">
+              {categories.map((c) => (
+                <Link
+                  key={c.id}
+                  href={`/products?category=${c.slug}`}
+                  className="rounded-2xl border border-amber-200 bg-white px-4 py-3 text-sm font-medium text-zinc-800 shadow-sm hover:border-amber-300 hover:bg-amber-50"
+                >
+                  {c.name}
+                </Link>
+              ))}
+            </div>
           </div>
-          <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
-            Ver todo
-          </Link>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {categories.map((c) => (
-            <Link
-              key={c.id}
-              href={`/products?category=${c.slug}`}
-              className="rounded-full border border-amber-200 bg-white px-4 py-2 text-sm font-medium shadow-sm hover:border-amber-300 hover:bg-amber-50"
-            >
-              {c.name}
-            </Link>
-          ))}
-        </div>
-      </section>
 
-      <section className="flex flex-col gap-4">
-        <div className="flex items-end justify-between gap-4">
-          <div className="flex flex-col gap-1">
-            <h2 className="section-heading text-2xl font-semibold text-zinc-950">Destacados</h2>
-            <p className="muted-copy text-sm">Productos elegidos para mostrar lo mejor de la tienda.</p>
+          <div className="surface-card rounded-3xl p-5">
+            <div className="flex flex-col gap-1">
+              <h2 className="section-heading text-2xl font-semibold text-zinc-950">Gamas de PC</h2>
+              <p className="muted-copy text-sm">Filtrá rapido por nivel de rendimiento.</p>
+            </div>
+            <div className="mt-4 flex flex-col gap-2">
+              {performanceTierOptions.map((option) => (
+                <Link
+                  key={option.value}
+                  href={`/products?tier=${option.value}`}
+                  className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-medium text-zinc-800 shadow-sm hover:border-amber-400 hover:bg-amber-50 hover:text-zinc-950"
+                >
+                  Gama {option.label}
+                </Link>
+              ))}
+            </div>
           </div>
-          <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
-            Ver más
-          </Link>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {cards.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
+        </aside>
+
+        <div className="flex flex-col gap-4">
+          <div className="flex items-end justify-between gap-4">
+            <div className="flex flex-col gap-1">
+              <h2 className="section-heading text-2xl font-semibold text-zinc-950">Destacados</h2>
+              <p className="muted-copy text-sm">Productos elegidos para mostrar lo mejor de la tienda.</p>
+            </div>
+            <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
+              Ver más
+            </Link>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {cards.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
         </div>
       </section>
     </div>

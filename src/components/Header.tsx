@@ -8,7 +8,7 @@ export function Header() {
   const { totalQuantity } = useCart();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-amber-200/80 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-amber-300/80 bg-white/95 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
@@ -23,19 +23,19 @@ export function Header() {
         <nav className="flex items-center gap-2 text-sm text-zinc-900 sm:gap-3">
           <Link
             href="/"
-            className="rounded-full px-3 py-2 font-medium hover:bg-amber-50 hover:text-amber-700"
+            className="rounded-full px-3 py-2 font-medium hover:bg-zinc-900 hover:text-amber-300"
           >
             Inicio
           </Link>
           <Link
             href="/products"
-            className="rounded-full px-3 py-2 font-medium hover:bg-amber-50 hover:text-amber-700"
+            className="rounded-full px-3 py-2 font-medium hover:bg-zinc-900 hover:text-amber-300"
           >
             Productos
           </Link>
           <Link
             href="/cart"
-            className="rounded-full border border-amber-300 bg-white px-3 py-2 font-medium text-zinc-900 shadow-sm hover:border-amber-400 hover:bg-amber-50"
+            className="rounded-full border border-amber-400 bg-zinc-900 px-3 py-2 font-medium text-amber-300 shadow-sm hover:bg-black"
             aria-label="Carrito"
           >
             Carrito ({totalQuantity})

@@ -35,22 +35,17 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-12">
       <section className="grid items-stretch gap-8 lg:grid-cols-[1.05fr_1fr]">
-        <div className="surface-card flex flex-col justify-center gap-6 rounded-3xl p-6 sm:p-8">
-          <div className="inline-flex w-fit rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+        <div className="flex flex-col justify-center gap-6 rounded-3xl border border-zinc-900 bg-zinc-950 p-6 text-white shadow-[0_18px_40px_rgba(0,0,0,0.22)] sm:p-8">
+          <div className="inline-flex w-fit rounded-full border border-amber-300 bg-amber-400 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-950">
             Tienda online de hardware
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="section-heading text-3xl font-semibold tracking-tight text-zinc-950 sm:text-5xl">
+            <h1 className="section-heading text-3xl font-semibold tracking-tight text-white sm:text-5xl">
               Componentes de PC para armar tu setup en BatyTech
             </h1>
-            <p className="muted-copy max-w-2xl text-base sm:text-lg">
+            <p className="max-w-2xl text-base text-zinc-300 sm:text-lg">
               Procesadores, GPUs, motherboards, memorias, almacenamiento y mas. Compra rapido, facil y con stock real.
             </p>
-          </div>
-          <div className="grid gap-2 text-sm text-zinc-600 sm:grid-cols-3">
-            <div className="rounded-2xl border border-amber-100 bg-white px-4 py-3">Stock actualizado</div>
-            <div className="rounded-2xl border border-amber-100 bg-white px-4 py-3">Carga por admin</div>
-            <div className="rounded-2xl border border-amber-100 bg-white px-4 py-3">Checkout por WhatsApp</div>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -61,7 +56,7 @@ export default async function Home() {
             </Link>
             <Link
               href="/cart"
-              className="rounded-full border border-zinc-900 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-900 hover:text-white"
+              className="rounded-full border border-white bg-white px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-100"
             >
               Ver carrito
             </Link>

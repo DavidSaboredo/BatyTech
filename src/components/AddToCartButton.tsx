@@ -39,7 +39,7 @@ export function AddToCartButton({
       }}
       className={
         className ??
-        "rounded-full border border-amber-400 bg-amber-400 px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300 disabled:opacity-40"
+        "rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300 disabled:opacity-40"
       }
     >
       {disabled ? "Sin stock" : added ? "Agregado" : "Agregar al carrito"}

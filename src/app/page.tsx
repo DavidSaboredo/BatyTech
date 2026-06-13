@@ -35,17 +35,32 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-12">
       <section className="grid items-stretch gap-8 lg:grid-cols-[1.05fr_1fr]">
-        <div className="flex flex-col justify-center gap-6 rounded-3xl border border-zinc-900 bg-zinc-950 p-6 text-white shadow-[0_18px_40px_rgba(0,0,0,0.22)] sm:p-8">
-          <div className="inline-flex w-fit rounded-full border border-amber-300 bg-amber-400 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-950">
+        <div className="surface-card relative flex flex-col justify-center gap-6 overflow-hidden rounded-3xl p-6 sm:p-8">
+          <div className="absolute inset-y-0 left-0 w-1.5 bg-amber-400" />
+          <div className="inline-flex w-fit rounded-full bg-zinc-950 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-300">
             Tienda online de hardware
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="section-heading text-3xl font-semibold tracking-tight text-white sm:text-5xl">
+            <h1 className="section-heading text-3xl font-semibold tracking-tight text-zinc-950 sm:text-5xl">
               Componentes de PC para armar tu setup en BatyTech
             </h1>
-            <p className="max-w-2xl text-base text-zinc-300 sm:text-lg">
+            <p className="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
               Procesadores, GPUs, motherboards, memorias, almacenamiento y mas. Compra rapido, facil y con stock real.
             </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-600">
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+              Stock real
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-zinc-950" />
+              Catalogo administrable
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+              Pedido rapido por WhatsApp
+            </div>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -56,7 +71,7 @@ export default async function Home() {
             </Link>
             <Link
               href="/cart"
-              className="rounded-full border border-white bg-white px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-100"
+              className="rounded-full border border-zinc-900 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-900 hover:text-white"
             >
               Ver carrito
             </Link>

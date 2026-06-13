@@ -15,7 +15,7 @@ export default function CartPage() {
         <p className="muted-copy mt-2 text-sm">Todavía no agregaste productos.</p>
         <Link
           href="/products"
-          className="mt-5 inline-flex rounded-full border border-amber-400 bg-amber-400 px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+          className="mt-5 inline-flex rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"
         >
           Ver productos
         </Link>
@@ -60,7 +60,7 @@ export default function CartPage() {
                   <button
                     type="button"
                     onClick={() => setQuantity(item.productId, item.quantity - 1)}
-                    className="h-9 w-9 rounded-full border border-amber-200 text-sm font-semibold text-zinc-900 hover:bg-amber-50"
+                    className="h-9 w-9 rounded-full border border-zinc-200 text-sm font-semibold text-zinc-900 hover:border-amber-400 hover:text-amber-600"
                     aria-label={`Restar una unidad de ${item.name}`}
                   >
                     -
@@ -76,7 +76,7 @@ export default function CartPage() {
                   <button
                     type="button"
                     onClick={() => setQuantity(item.productId, item.quantity + 1)}
-                    className="h-9 w-9 rounded-full border border-amber-200 text-sm font-semibold text-zinc-900 hover:bg-amber-50"
+                    className="h-9 w-9 rounded-full border border-zinc-200 text-sm font-semibold text-zinc-900 hover:border-amber-400 hover:text-amber-600"
                     aria-label={`Sumar una unidad de ${item.name}`}
                   >
                     +
@@ -102,7 +102,7 @@ export default function CartPage() {
           </div>
           <Link
             href="/checkout"
-            className="mt-4 flex w-full items-center justify-center rounded-full border border-amber-400 bg-amber-400 px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+            className="mt-4 flex w-full items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"
           >
             Ir a checkout
           </Link>

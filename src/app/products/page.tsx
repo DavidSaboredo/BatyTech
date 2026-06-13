@@ -62,12 +62,12 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
           name="q"
           defaultValue={q}
           placeholder="Buscar (ej: RTX, Ryzen, NVMe, SKU...)"
-          className="h-10 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 sm:col-span-2"
+          className="h-11 rounded-xl border border-zinc-200 px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 sm:col-span-2"
         />
         <select
           name="category"
           defaultValue={category || ""}
-          className="h-10 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+          className="h-11 rounded-xl border border-zinc-200 bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
         >
           <option value="">Todas las categorías</option>
           {categories.map((c) => (
@@ -79,7 +79,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         <select
           name="brand"
           defaultValue={brand || ""}
-          className="h-10 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+          className="h-11 rounded-xl border border-zinc-200 bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
         >
           <option value="">Todas las marcas</option>
           {brands.map((b) => (
@@ -91,7 +91,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         <div className="flex items-center gap-2 sm:col-span-4">
           <button
             type="submit"
-            className="rounded-full border border-amber-400 bg-amber-400 px-4 py-2 text-sm font-semibold text-zinc-900 shadow-sm hover:bg-amber-300"
+            className="rounded-full border border-zinc-900 bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"
           >
             Aplicar
           </button>

@@ -19,8 +19,9 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
 
   return (
     <div className="surface-card flex h-full flex-col overflow-hidden rounded-3xl">
+      <div className="h-1.5 bg-amber-400" />
       <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative h-48 w-full bg-gradient-to-br from-white to-amber-50/60">
+        <div className="relative h-48 w-full bg-zinc-50">
           <Image src={product.imageUrl} alt={product.name} fill className="object-contain p-8" />
         </div>
       </Link>
@@ -32,8 +33,8 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
         <div className="mt-auto flex items-end justify-between gap-3">
           <div className="flex flex-col gap-1">
             <div className="text-[11px] uppercase tracking-wide text-zinc-400">Disponibilidad</div>
-            <div className={`text-xs font-medium ${disabled ? "text-red-600" : "text-zinc-600"}`}>
-              {disabled ? "Sin stock" : `Stock: ${product.stock}`}
+            <div className={`inline-flex w-fit rounded-full px-2.5 py-1 text-xs font-medium ${disabled ? "bg-red-50 text-red-600" : "bg-zinc-100 text-zinc-700"}`}>
+              {disabled ? "Sin stock" : `${product.stock} en stock`}
             </div>
           </div>
           <AddToCartButton
@@ -45,7 +46,7 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
               imageUrl: product.imageUrl,
               stock: product.stock,
             }}
-            className="rounded-full border border-amber-400 bg-amber-400 px-3 py-2 text-xs font-semibold text-zinc-900 shadow-sm hover:bg-amber-300 disabled:opacity-40"
+            className="rounded-full border border-zinc-900 bg-zinc-900 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:border-amber-400 hover:text-amber-300 disabled:opacity-40"
           />
         </div>
       </div>

@@ -33,7 +33,7 @@ export default function CheckoutPage() {
             href={status.whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex rounded-full border border-amber-400 bg-amber-400 px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+            className="inline-flex rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"
           >
             Abrir WhatsApp
           </a>
@@ -55,7 +55,7 @@ export default function CheckoutPage() {
         <p className="muted-copy mt-2 text-sm">Tu carrito está vacío.</p>
         <Link
           href="/products"
-          className="mt-4 inline-flex rounded-full border border-amber-400 bg-amber-400 px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+          className="mt-4 inline-flex rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"
         >
           Ver productos
         </Link>
@@ -172,7 +172,7 @@ export default function CheckoutPage() {
           <button
             type="submit"
             disabled={status.state === "submitting"}
-            className="mt-2 rounded-full border border-amber-400 bg-amber-400 px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300 disabled:opacity-40"
+            className="mt-2 rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300 disabled:opacity-40"
           >
             {status.state === "submitting" ? "Procesando..." : "Confirmar por WhatsApp"}
           </button>

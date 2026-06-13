@@ -8,6 +8,42 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const { categories, featured, usingFallback } = await getHomeStorefrontData();
+  const highlights = [
+    "Stock real",
+    "Compatibilidad y rendimiento",
+    "Atencion directa por WhatsApp",
+  ];
+  const aboutPoints = [
+    "Vendemos hardware con foco en compatibilidad, rendimiento y presupuesto real.",
+    "Tambien ofrecemos soporte y desarrollo web, pero siempre como complemento de la tienda.",
+  ];
+  const services = [
+    {
+      title: "Asesoramiento en componentes",
+      description:
+        "Te ayudamos a elegir los componentes correctos para tu compra.",
+      href: "/products",
+      cta: "Ver catalogo",
+    },
+    {
+      title: "Creacion de paginas web",
+      description:
+        "Creamos webs modernas para negocios y proyectos cuando lo necesites.",
+      href: "/#contacto",
+      cta: "Consultar proyecto",
+    },
+    {
+      title: "Soporte y mantenimiento",
+      description:
+        "Resolvemos mejoras, actualizaciones y problemas tecnicos puntuales.",
+      href: "/#contacto",
+      cta: "Pedir soporte",
+    },
+  ];
+  const socialLinks = [
+    { name: "Instagram", href: "/#comunidad", status: "Proximamente" },
+    { name: "TikTok", href: "/#comunidad", status: "Proximamente" },
+  ];
 
   const slides = featured.slice(0, 4).map((p) => ({
     title: p.name,
@@ -50,18 +86,12 @@ export default async function Home() {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-600">
-            <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-              Stock real
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-zinc-950" />
-              Catalogo administrable
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-              Pedido rapido por WhatsApp
-            </div>
+            {highlights.map((highlight, index) => (
+              <div key={highlight} className="flex items-center gap-2">
+                <span className={`h-2.5 w-2.5 rounded-full ${index === 1 ? "bg-zinc-950" : "bg-amber-400"}`} />
+                {highlight}
+              </div>
+            ))}
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -148,6 +178,125 @@ export default async function Home() {
             {cards.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="quienes-somos"
+        className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.24)] backdrop-blur-[2px] sm:p-6"
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,205,84,0.1),rgba(255,255,255,0.03)_38%,rgba(0,0,0,0)_72%)]" />
+        <div className="relative z-10 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="flex flex-col gap-3">
+            <div className="inline-flex w-fit rounded-full bg-zinc-950 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-300">
+              Quienes somos
+            </div>
+            <h2 className="section-heading text-2xl font-semibold text-amber-300">Hardware primero, ayuda real siempre</h2>
+            <p className="max-w-3xl text-sm leading-6 text-amber-100/85 sm:text-base">
+              BatysTech esta pensada para vender componentes de PC con una experiencia clara y directa. El foco principal esta en el catalogo, y los servicios quedan como un apoyo para quien necesita una mano extra.
+            </p>
+            <div className="grid gap-2">
+              {aboutPoints.map((point) => (
+                <div key={point} className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm leading-6 text-amber-50/90">
+                  {point}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div id="comunidad" className="surface-card flex flex-col gap-3 rounded-3xl p-5 shadow-[0_16px_36px_rgba(15,23,42,0.14)]">
+            <div className="inline-flex w-fit rounded-full bg-zinc-950 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-300">
+              Comunidad
+            </div>
+            <p className="text-sm leading-6 text-zinc-600">
+              Dejamos listo el espacio para sumar Instagram y TikTok cuando definamos las cuentas oficiales.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {socialLinks.map((social) => (
+                <Link
+                  key={social.name}
+                  href={social.href}
+                  className="rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-800 hover:border-amber-300 hover:bg-amber-50"
+                >
+                  {social.name} · {social.status}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="servicios"
+        className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.24)] backdrop-blur-[2px] sm:p-6"
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,209,102,0.08),rgba(255,255,255,0.03)_40%,rgba(0,0,0,0)_75%)]" />
+        <div className="relative z-10 flex flex-col gap-5">
+          <div className="flex flex-col gap-2">
+            <div className="inline-flex w-fit rounded-full bg-zinc-950 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-300">
+              Servicios
+            </div>
+            <h2 className="section-heading text-2xl font-semibold text-amber-300">Servicios complementarios</h2>
+            <p className="max-w-3xl text-sm leading-6 text-amber-100/85 sm:text-base">
+              Estos servicios acompañan la tienda y quedan debajo del catalogo para no quitarle protagonismo a la venta de hardware.
+            </p>
+          </div>
+
+          <div className="grid gap-3 lg:grid-cols-3">
+            {services.map((service) => (
+              <article
+                key={service.title}
+                className="surface-card flex h-full flex-col gap-3 rounded-3xl p-4 shadow-[0_16px_36px_rgba(15,23,42,0.14)]"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-sm font-semibold text-amber-700 shadow-sm">
+                  BT
+                </div>
+                <div className="flex flex-1 flex-col gap-3">
+                  <h3 className="text-base font-semibold text-zinc-950">{service.title}</h3>
+                  <p className="text-sm leading-6 text-zinc-600">{service.description}</p>
+                </div>
+                <Link
+                  href={service.href}
+                  className="inline-flex w-fit items-center rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold text-zinc-900 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white"
+                >
+                  {service.cta}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="contacto"
+        className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.24)] backdrop-blur-[2px] sm:p-6"
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,205,84,0.1),rgba(255,255,255,0.03)_40%,rgba(0,0,0,0)_75%)]" />
+        <div className="relative z-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex max-w-3xl flex-col gap-2">
+            <div className="inline-flex w-fit rounded-full bg-zinc-950 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-300">
+              Contactanos
+            </div>
+            <h2 className="section-heading text-2xl font-semibold text-amber-300">Consulta rapida</h2>
+            <p className="text-sm leading-6 text-amber-100/85 sm:text-base">
+              Si queres armar una PC, mejorar tu equipo actual o consultar por un servicio, escribinos y te orientamos sin vueltas.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <Link
+              href="/checkout"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-amber-400 bg-amber-400 px-4 py-2 text-sm font-semibold leading-none whitespace-nowrap text-zinc-900 hover:bg-amber-300"
+            >
+              Hablar por WhatsApp
+            </Link>
+            <Link
+              href="/products"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold leading-none whitespace-nowrap text-zinc-900 hover:border-amber-300 hover:bg-amber-50"
+            >
+              Ver catalogo
+            </Link>
           </div>
         </div>
       </section>

@@ -77,29 +77,39 @@ export default async function AdminEditProductPage({ params }: { params: Promise
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold">Editar producto</h1>
+          <h1 className="section-heading text-2xl font-semibold text-zinc-950">Editar producto</h1>
           <div className="text-sm text-zinc-600">{product.id}</div>
         </div>
         <div className="flex items-center gap-3">
-          <Link href={`/products/${product.slug}`} className="rounded-full border px-4 py-2 text-sm font-medium hover:bg-zinc-50">
+          <Link href={`/products/${product.slug}`} className="rounded-full border border-zinc-900 px-4 py-2 text-sm font-medium hover:bg-zinc-900 hover:text-white">
             Ver en tienda
           </Link>
-          <Link href={ownerAdminPath("products")} className="text-sm text-zinc-600 hover:underline">
+          <Link href={ownerAdminPath("products")} className="text-sm font-medium text-zinc-600 hover:underline">
             Volver
           </Link>
         </div>
       </div>
 
-      <form action={updateProductAction} className="grid gap-4 rounded-2xl border bg-white p-5">
+      <form action={updateProductAction} className="surface-card grid gap-4 rounded-3xl p-5 sm:p-6">
         <input type="hidden" name="id" value={product.id} />
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Nombre</label>
-            <input name="name" required defaultValue={product.name} className="h-10 rounded-xl border px-3 text-sm" />
+            <input
+              name="name"
+              required
+              defaultValue={product.name}
+              className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">SKU</label>
-            <input name="sku" required defaultValue={product.sku} className="h-10 rounded-xl border px-3 text-sm" />
+            <input
+              name="sku"
+              required
+              defaultValue={product.sku}
+              className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Precio (centavos ARS)</label>
@@ -109,7 +119,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
               min={0}
               required
               defaultValue={product.priceCents}
-              className="h-10 rounded-xl border px-3 text-sm"
+              className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -120,12 +130,17 @@ export default async function AdminEditProductPage({ params }: { params: Promise
               min={0}
               required
               defaultValue={product.stock}
-              className="h-10 rounded-xl border px-3 text-sm"
+              className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
             />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Categoría</label>
-            <select name="categoryId" required defaultValue={product.categoryId} className="h-10 rounded-xl border bg-white px-3 text-sm">
+            <select
+              name="categoryId"
+              required
+              defaultValue={product.categoryId}
+              className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            >
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name}
@@ -135,7 +150,12 @@ export default async function AdminEditProductPage({ params }: { params: Promise
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Marca</label>
-            <select name="brandId" required defaultValue={product.brandId} className="h-10 rounded-xl border bg-white px-3 text-sm">
+            <select
+              name="brandId"
+              required
+              defaultValue={product.brandId}
+              className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            >
               {brands.map((b) => (
                 <option key={b.id} value={b.id}>
                   {b.name}
@@ -149,7 +169,13 @@ export default async function AdminEditProductPage({ params }: { params: Promise
 
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium">Descripción</label>
-          <textarea name="description" required rows={6} defaultValue={product.description} className="rounded-xl border px-3 py-2 text-sm" />
+          <textarea
+            name="description"
+            required
+            rows={6}
+            defaultValue={product.description}
+            className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+          />
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
@@ -164,13 +190,16 @@ export default async function AdminEditProductPage({ params }: { params: Promise
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <button type="submit" className="rounded-full bg-zinc-900 px-5 py-2 text-sm font-medium text-white">
+          <button
+            type="submit"
+            className="rounded-full border border-amber-400 bg-amber-400 px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+          >
             Guardar cambios
           </button>
           <button
             formAction={deleteProductAction}
             formNoValidate
-            className="rounded-full border px-5 py-2 text-sm font-medium hover:bg-zinc-50"
+            className="rounded-full border border-zinc-200 px-5 py-2.5 text-sm font-medium hover:bg-zinc-50"
           >
             Eliminar
           </button>

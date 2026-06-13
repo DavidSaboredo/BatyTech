@@ -25,13 +25,13 @@ export function Carousel({ slides, intervalMs = 4500 }: { slides: CarouselSlide[
   const slide = safeSlides[index]!;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border bg-zinc-50">
+    <div className="surface-card relative overflow-hidden rounded-3xl">
       <Link href={slide.href} className="block">
-        <div className="relative h-56 w-full sm:h-72">
+        <div className="relative h-56 w-full bg-gradient-to-br from-white to-amber-50/60 sm:h-72">
           <Image src={slide.imageUrl} alt={slide.title} fill className="object-contain p-10" priority />
         </div>
-        <div className="border-t bg-white px-5 py-4">
-          <div className="text-lg font-semibold">{slide.title}</div>
+        <div className="border-t border-amber-100 bg-white px-5 py-4">
+          <div className="text-lg font-semibold text-zinc-900">{slide.title}</div>
           {slide.subtitle ? <div className="text-sm text-zinc-600">{slide.subtitle}</div> : null}
         </div>
       </Link>

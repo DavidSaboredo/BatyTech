@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { GeekCatSticker } from "@/components/GeekCatSticker";
 import { ProductCard } from "@/components/ProductCard";
 import { prisma } from "@/lib/db";
 
@@ -52,18 +51,13 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   }));
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-semibold">Productos</h1>
-          <div className="pointer-events-none hidden opacity-70 sm:block">
-            <GeekCatSticker name="workingHard" size={56} />
-          </div>
-        </div>
-        <p className="text-sm text-zinc-600">Filtrá por categoría, marca o buscá por nombre/SKU.</p>
+        <h1 className="section-heading text-3xl font-semibold text-zinc-950">Productos</h1>
+        <p className="muted-copy max-w-2xl text-sm sm:text-base">Filtrá por categoría, marca o buscá por nombre o SKU para encontrar más rápido lo que necesitás.</p>
       </div>
 
-      <form className="grid gap-3 rounded-2xl border border-amber-200 bg-white p-4 sm:grid-cols-4">
+      <form className="surface-card grid gap-3 rounded-3xl p-4 sm:grid-cols-4 sm:p-5">
         <input
           name="q"
           defaultValue={q}
@@ -97,7 +91,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         <div className="flex items-center gap-2 sm:col-span-4">
           <button
             type="submit"
-            className="rounded-full border border-amber-400 bg-amber-400 px-4 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+            className="rounded-full border border-amber-400 bg-amber-400 px-4 py-2 text-sm font-semibold text-zinc-900 shadow-sm hover:bg-amber-300"
           >
             Aplicar
           </button>
@@ -113,6 +107,12 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
           <ProductCard key={p.id} product={p} />
         ))}
       </div>
+      {cards.length === 0 ? (
+        <div className="surface-card rounded-3xl px-6 py-10 text-center">
+          <h2 className="text-lg font-semibold text-zinc-900">No encontramos productos con esos filtros</h2>
+          <p className="muted-copy mt-2 text-sm">Probá limpiar la búsqueda o elegir otra categoría o marca.</p>
+        </div>
+      ) : null}
     </div>
   );
 }

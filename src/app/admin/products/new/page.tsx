@@ -75,33 +75,33 @@ export default async function AdminNewProductPage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Nuevo producto</h1>
-        <Link href={ownerAdminPath("products")} className="text-sm text-zinc-600 hover:underline">
+        <h1 className="section-heading text-2xl font-semibold text-zinc-950">Nuevo producto</h1>
+        <Link href={ownerAdminPath("products")} className="text-sm font-medium text-zinc-600 hover:underline">
           Volver
         </Link>
       </div>
 
-      <form action={createProductAction} className="grid gap-4 rounded-2xl border bg-white p-5">
+      <form action={createProductAction} className="surface-card grid gap-4 rounded-3xl p-5 sm:p-6">
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Nombre</label>
-            <input name="name" required className="h-10 rounded-xl border px-3 text-sm" />
+            <input name="name" required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">SKU</label>
-            <input name="sku" required className="h-10 rounded-xl border px-3 text-sm" />
+            <input name="sku" required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Precio (centavos ARS)</label>
-            <input name="priceCents" type="number" min={0} required className="h-10 rounded-xl border px-3 text-sm" />
+            <input name="priceCents" type="number" min={0} required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Stock</label>
-            <input name="stock" type="number" min={0} required className="h-10 rounded-xl border px-3 text-sm" />
+            <input name="stock" type="number" min={0} required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Categoría</label>
-            <select name="categoryId" required className="h-10 rounded-xl border bg-white px-3 text-sm">
+            <select name="categoryId" required className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200">
               <option value="" />
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -112,7 +112,7 @@ export default async function AdminNewProductPage() {
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Marca</label>
-            <select name="brandId" required className="h-10 rounded-xl border bg-white px-3 text-sm">
+            <select name="brandId" required className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200">
               <option value="" />
               {brands.map((b) => (
                 <option key={b.id} value={b.id}>
@@ -127,7 +127,12 @@ export default async function AdminNewProductPage() {
 
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium">Descripción</label>
-          <textarea name="description" required rows={5} className="rounded-xl border px-3 py-2 text-sm" />
+          <textarea
+            name="description"
+            required
+            rows={5}
+            className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+          />
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
@@ -141,7 +146,10 @@ export default async function AdminNewProductPage() {
           </label>
         </div>
 
-        <button type="submit" className="rounded-full bg-zinc-900 px-5 py-2 text-sm font-medium text-white">
+        <button
+          type="submit"
+          className="rounded-full border border-amber-400 bg-amber-400 px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+        >
           Guardar
         </button>
       </form>

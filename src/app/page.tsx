@@ -33,25 +33,35 @@ export default async function Home() {
   }));
 
   return (
-    <div className="flex flex-col gap-10">
-      <section className="grid gap-8 lg:grid-cols-2">
-        <div className="flex flex-col justify-center gap-4">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Componentes de PC para armar tu setup en BatyTech
-          </h1>
-          <p className="text-zinc-600">
-            Procesadores, GPUs, motherboards, memorias, almacenamiento y más. Comprá rápido, fácil y con stock real.
-          </p>
+    <div className="flex flex-col gap-12">
+      <section className="grid items-stretch gap-8 lg:grid-cols-[1.05fr_1fr]">
+        <div className="surface-card flex flex-col justify-center gap-6 rounded-3xl p-6 sm:p-8">
+          <div className="inline-flex w-fit rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+            Tienda online de hardware
+          </div>
+          <div className="flex flex-col gap-4">
+            <h1 className="section-heading text-3xl font-semibold tracking-tight text-zinc-950 sm:text-5xl">
+              Componentes de PC para armar tu setup en BatyTech
+            </h1>
+            <p className="muted-copy max-w-2xl text-base sm:text-lg">
+              Procesadores, GPUs, motherboards, memorias, almacenamiento y mas. Compra rapido, facil y con stock real.
+            </p>
+          </div>
+          <div className="grid gap-2 text-sm text-zinc-600 sm:grid-cols-3">
+            <div className="rounded-2xl border border-amber-100 bg-white px-4 py-3">Stock actualizado</div>
+            <div className="rounded-2xl border border-amber-100 bg-white px-4 py-3">Carga por admin</div>
+            <div className="rounded-2xl border border-amber-100 bg-white px-4 py-3">Checkout por WhatsApp</div>
+          </div>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/products"
-              className="rounded-full border border-amber-400 bg-amber-400 px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
+              className="rounded-full border border-amber-400 bg-amber-400 px-5 py-2.5 text-sm font-semibold text-zinc-900 shadow-sm hover:bg-amber-300"
             >
               Ver productos
             </Link>
             <Link
               href="/cart"
-              className="rounded-full border border-zinc-900 bg-white px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-zinc-900 hover:text-white"
+              className="rounded-full border border-zinc-900 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-900 hover:text-white"
             >
               Ver carrito
             </Link>
@@ -62,7 +72,10 @@ export default async function Home() {
 
       <section className="flex flex-col gap-4">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="text-xl font-semibold">Categorías</h2>
+          <div className="flex flex-col gap-1">
+            <h2 className="section-heading text-2xl font-semibold text-zinc-950">Categorías</h2>
+            <p className="muted-copy text-sm">Entrá directo a la parte del catálogo que te interesa.</p>
+          </div>
           <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
             Ver todo
           </Link>
@@ -72,7 +85,7 @@ export default async function Home() {
             <Link
               key={c.id}
               href={`/products?category=${c.slug}`}
-              className="rounded-full border border-amber-200 bg-white px-3 py-1.5 text-sm hover:border-amber-300 hover:bg-amber-50"
+              className="rounded-full border border-amber-200 bg-white px-4 py-2 text-sm font-medium shadow-sm hover:border-amber-300 hover:bg-amber-50"
             >
               {c.name}
             </Link>
@@ -82,7 +95,10 @@ export default async function Home() {
 
       <section className="flex flex-col gap-4">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="text-xl font-semibold">Destacados</h2>
+          <div className="flex flex-col gap-1">
+            <h2 className="section-heading text-2xl font-semibold text-zinc-950">Destacados</h2>
+            <p className="muted-copy text-sm">Productos elegidos para mostrar lo mejor de la tienda.</p>
+          </div>
           <Link href="/products" className="text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4">
             Ver más
           </Link>

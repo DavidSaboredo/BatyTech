@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/AddToCartButton";
-import { GeekCatSticker } from "@/components/GeekCatSticker";
 import { formatMoney } from "@/lib/money";
 import { prisma } from "@/lib/db";
 
@@ -25,14 +24,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      <div className="overflow-hidden rounded-2xl border bg-white">
-        <div className="relative h-80 w-full bg-zinc-50">
+      <div className="surface-card overflow-hidden rounded-3xl">
+        <div className="relative h-80 w-full bg-gradient-to-br from-white to-amber-50/60">
           <Image src={imageUrl} alt={product.name} fill className="object-contain p-10" priority />
         </div>
         {product.images.length > 1 ? (
-          <div className="grid grid-cols-4 gap-2 border-t bg-white p-3">
+          <div className="grid grid-cols-4 gap-2 border-t border-amber-100 bg-white p-3">
             {product.images.slice(0, 4).map((img) => (
-              <div key={img.id} className="relative h-16 overflow-hidden rounded-xl border bg-zinc-50">
+              <div key={img.id} className="relative h-16 overflow-hidden rounded-xl border border-amber-100 bg-zinc-50">
                 <Image src={img.url} alt={img.alt} fill className="object-contain p-4" />
               </div>
             ))}
@@ -58,18 +57,20 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </Link>
         </div>
 
-        <h1 className="text-2xl font-semibold tracking-tight">{product.name}</h1>
-        <div className="text-sm text-zinc-600">SKU: {product.sku}</div>
-        <div className="flex items-center gap-3">
-          <div className="text-2xl font-semibold">{formatMoney(product.priceCents)}</div>
-          <div className="pointer-events-none hidden opacity-70 sm:block">
-            <GeekCatSticker name="gamerRage" size={52} />
-          </div>
+        <div className="flex flex-col gap-2">
+          <h1 className="section-heading text-3xl font-semibold tracking-tight text-zinc-950">{product.name}</h1>
+          <div className="text-sm text-zinc-500">SKU: {product.sku}</div>
+          <div className="text-3xl font-semibold text-zinc-950">{formatMoney(product.priceCents)}</div>
         </div>
 
-        <div className="rounded-2xl border bg-white p-4">
-          <div className="flex items-center justify-between gap-3">
-            <div className="text-sm text-zinc-600">{product.stock > 0 ? `Stock: ${product.stock}` : "Sin stock"}</div>
+        <div className="surface-card rounded-3xl p-5">
+          <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div className="flex flex-col gap-1">
+              <div className="text-xs uppercase tracking-[0.18em] text-zinc-400">Disponibilidad</div>
+              <div className={`text-sm font-medium ${product.stock > 0 ? "text-zinc-700" : "text-red-600"}`}>
+                {product.stock > 0 ? `Stock: ${product.stock}` : "Sin stock"}
+              </div>
+            </div>
             <AddToCartButton
               product={{
                 id: product.id,
@@ -83,9 +84,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
 
-        <div className="rounded-2xl border bg-white p-4">
-          <div className="text-sm font-medium">Descripción</div>
-          <div className="mt-2 whitespace-pre-wrap text-sm text-zinc-700">{product.description}</div>
+        <div className="surface-card rounded-3xl p-5">
+          <div className="text-sm font-semibold text-zinc-900">Descripción</div>
+          <div className="mt-2 whitespace-pre-wrap text-sm leading-6 text-zinc-700">{product.description}</div>
         </div>
       </div>
     </div>

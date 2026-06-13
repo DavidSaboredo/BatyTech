@@ -23,8 +23,8 @@ export default function CheckoutPage() {
 
   if (status.state === "done") {
     return (
-      <div className="rounded-2xl border bg-white p-6">
-        <h1 className="text-xl font-semibold">Orden creada</h1>
+      <div className="surface-card rounded-3xl p-8">
+        <h1 className="section-heading text-2xl font-semibold text-zinc-950">Orden creada</h1>
         <p className="mt-2 text-sm text-zinc-600">
           Orden creada: <span className="font-medium text-zinc-900">{status.orderId}</span>
         </p>
@@ -50,9 +50,9 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border bg-white p-6">
-        <h1 className="text-xl font-semibold">Checkout</h1>
-        <p className="mt-2 text-sm text-zinc-600">Tu carrito está vacío.</p>
+      <div className="surface-card rounded-3xl p-8">
+        <h1 className="section-heading text-2xl font-semibold text-zinc-950">Checkout</h1>
+        <p className="muted-copy mt-2 text-sm">Tu carrito está vacío.</p>
         <Link
           href="/products"
           className="mt-4 inline-flex rounded-full border border-amber-400 bg-amber-400 px-5 py-2 text-sm font-semibold text-zinc-900 hover:bg-amber-300"
@@ -65,9 +65,9 @@ export default function CheckoutPage() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-3">
-      <div className="rounded-2xl border bg-white p-5 lg:col-span-2">
-        <h1 className="text-xl font-semibold">Checkout</h1>
-        <p className="mt-1 text-sm text-zinc-600">Completá tus datos y abrimos WhatsApp con la orden lista para enviar.</p>
+      <div className="surface-card rounded-3xl p-5 lg:col-span-2 sm:p-6">
+        <h1 className="section-heading text-2xl font-semibold text-zinc-950">Checkout</h1>
+        <p className="muted-copy mt-1 text-sm">Completá tus datos y abrimos WhatsApp con la orden lista para enviar.</p>
 
         <form
           className="mt-5 grid gap-3"
@@ -182,8 +182,8 @@ export default function CheckoutPage() {
         </form>
       </div>
 
-      <div className="rounded-2xl border bg-white p-5">
-        <div className="text-sm font-medium">Resumen</div>
+      <div className="surface-card rounded-3xl p-5">
+        <div className="text-sm font-semibold text-zinc-900">Resumen</div>
         <div className="mt-3 flex flex-col gap-2">
           {items.map((i) => (
             <div key={i.productId} className="flex items-center justify-between text-sm">

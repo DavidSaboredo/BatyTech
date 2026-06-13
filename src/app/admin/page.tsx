@@ -13,24 +13,24 @@ export default async function AdminHomePage() {
 
   return (
     <div className="grid gap-4 sm:grid-cols-3">
-      <div className="rounded-2xl border bg-white p-5">
-        <div className="text-sm text-zinc-600">Productos</div>
-        <div className="mt-1 text-2xl font-semibold">{products}</div>
-        <Link href={ownerAdminPath("products")} className="mt-3 inline-flex text-sm text-zinc-600 hover:underline">
+      <div className="surface-card rounded-3xl p-5">
+        <div className="text-sm text-zinc-500">Productos</div>
+        <div className="mt-2 text-3xl font-semibold text-zinc-950">{products}</div>
+        <Link href={ownerAdminPath("products")} className="mt-4 inline-flex text-sm font-medium text-amber-700 hover:underline">
           Gestionar
         </Link>
       </div>
-      <div className="rounded-2xl border bg-white p-5">
-        <div className="text-sm text-zinc-600">Categorías</div>
-        <div className="mt-1 text-2xl font-semibold">{categories}</div>
-        <Link href={ownerAdminPath("categories")} className="mt-3 inline-flex text-sm text-zinc-600 hover:underline">
+      <div className="surface-card rounded-3xl p-5">
+        <div className="text-sm text-zinc-500">Categorías</div>
+        <div className="mt-2 text-3xl font-semibold text-zinc-950">{categories}</div>
+        <Link href={ownerAdminPath("categories")} className="mt-4 inline-flex text-sm font-medium text-amber-700 hover:underline">
           Gestionar
         </Link>
       </div>
-      <div className="rounded-2xl border bg-white p-5">
-        <div className="text-sm text-zinc-600">Órdenes pendientes</div>
-        <div className="mt-1 text-2xl font-semibold">{ordersPending}</div>
-        <Link href={ownerAdminPath("orders")} className="mt-3 inline-flex text-sm text-zinc-600 hover:underline">
+      <div className="surface-card rounded-3xl p-5">
+        <div className="text-sm text-zinc-500">Órdenes pendientes</div>
+        <div className="mt-2 text-3xl font-semibold text-zinc-950">{ordersPending}</div>
+        <Link href={ownerAdminPath("orders")} className="mt-4 inline-flex text-sm font-medium text-amber-700 hover:underline">
           Ver órdenes
         </Link>
       </div>

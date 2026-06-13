@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900">
         <CartProvider>
           <Header />
-          <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8">
+          <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-6 sm:py-8">
             {children}
           </main>
           <Footer />

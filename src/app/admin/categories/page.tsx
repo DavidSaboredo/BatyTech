@@ -37,30 +37,34 @@ export default async function AdminCategoriesPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="rounded-2xl border bg-white p-5">
-        <div className="text-sm font-semibold">Nueva categoría</div>
+      <div className="surface-card rounded-3xl p-5">
+        <div className="text-sm font-semibold text-zinc-900">Nueva categoría</div>
         <form action={createCategoryAction} className="mt-3 flex flex-wrap gap-2">
-          <input name="name" placeholder="Ej: Procesadores" className="h-10 flex-1 rounded-xl border px-3 text-sm" />
-          <button type="submit" className="h-10 rounded-full bg-zinc-900 px-5 text-sm font-medium text-white">
+          <input
+            name="name"
+            placeholder="Ej: Procesadores"
+            className="h-11 flex-1 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+          />
+          <button type="submit" className="h-11 rounded-full border border-amber-400 bg-amber-400 px-5 text-sm font-semibold text-zinc-900 hover:bg-amber-300">
             Crear/Actualizar
           </button>
         </form>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border bg-white">
-        <div className="border-b px-5 py-3 text-sm font-semibold">Categorías</div>
+      <div className="surface-card overflow-hidden rounded-3xl">
+        <div className="border-b border-amber-100 px-5 py-3 text-sm font-semibold text-zinc-900">Categorías</div>
         <div className="divide-y">
           {categories.map((c) => (
             <div key={c.id} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3">
               <div className="flex flex-col">
-                <div className="font-medium">{c.name}</div>
+                <div className="font-semibold text-zinc-900">{c.name}</div>
                 <div className="text-xs text-zinc-600">
                   slug: {c.slug} · productos: {c._count.products}
                 </div>
               </div>
               <form action={deleteCategoryAction}>
                 <input type="hidden" name="id" value={c.id} />
-                <button type="submit" className="rounded-full border px-3 py-1.5 text-sm hover:bg-zinc-50">
+                <button type="submit" className="rounded-full border border-zinc-200 px-3 py-1.5 text-sm font-medium hover:bg-zinc-50">
                   Eliminar
                 </button>
               </form>

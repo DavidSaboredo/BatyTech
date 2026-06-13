@@ -37,30 +37,34 @@ export default async function AdminBrandsPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="rounded-2xl border bg-white p-5">
-        <div className="text-sm font-semibold">Nueva marca</div>
+      <div className="surface-card rounded-3xl p-5">
+        <div className="text-sm font-semibold text-zinc-900">Nueva marca</div>
         <form action={createBrandAction} className="mt-3 flex flex-wrap gap-2">
-          <input name="name" placeholder="Ej: ASUS" className="h-10 flex-1 rounded-xl border px-3 text-sm" />
-          <button type="submit" className="h-10 rounded-full bg-zinc-900 px-5 text-sm font-medium text-white">
+          <input
+            name="name"
+            placeholder="Ej: ASUS"
+            className="h-11 flex-1 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+          />
+          <button type="submit" className="h-11 rounded-full border border-amber-400 bg-amber-400 px-5 text-sm font-semibold text-zinc-900 hover:bg-amber-300">
             Crear/Actualizar
           </button>
         </form>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border bg-white">
-        <div className="border-b px-5 py-3 text-sm font-semibold">Marcas</div>
+      <div className="surface-card overflow-hidden rounded-3xl">
+        <div className="border-b border-amber-100 px-5 py-3 text-sm font-semibold text-zinc-900">Marcas</div>
         <div className="divide-y">
           {brands.map((b) => (
             <div key={b.id} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3">
               <div className="flex flex-col">
-                <div className="font-medium">{b.name}</div>
+                <div className="font-semibold text-zinc-900">{b.name}</div>
                 <div className="text-xs text-zinc-600">
                   slug: {b.slug} · productos: {b._count.products}
                 </div>
               </div>
               <form action={deleteBrandAction}>
                 <input type="hidden" name="id" value={b.id} />
-                <button type="submit" className="rounded-full border px-3 py-1.5 text-sm hover:bg-zinc-50">
+                <button type="submit" className="rounded-full border border-zinc-200 px-3 py-1.5 text-sm font-medium hover:bg-zinc-50">
                   Eliminar
                 </button>
               </form>

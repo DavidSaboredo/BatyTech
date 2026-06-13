@@ -18,19 +18,24 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
   const disabled = product.stock <= 0;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border bg-white">
+    <div className="surface-card flex h-full flex-col overflow-hidden rounded-3xl">
       <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative h-44 w-full bg-zinc-50">
+        <div className="relative h-48 w-full bg-gradient-to-br from-white to-amber-50/60">
           <Image src={product.imageUrl} alt={product.name} fill className="object-contain p-8" />
         </div>
       </Link>
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <Link href={`/products/${product.slug}`} className="font-medium leading-6 hover:underline">
+      <div className="flex flex-1 flex-col gap-3 p-4">
+        <Link href={`/products/${product.slug}`} className="line-clamp-2 min-h-12 text-base font-semibold leading-6 hover:text-amber-700">
           {product.name}
         </Link>
-        <div className="text-sm text-zinc-600">{formatMoney(product.priceCents)}</div>
-        <div className="mt-auto flex items-center justify-between gap-2">
-          <div className="text-xs text-zinc-500">{disabled ? "Sin stock" : `Stock: ${product.stock}`}</div>
+        <div className="text-lg font-semibold text-zinc-900">{formatMoney(product.priceCents)}</div>
+        <div className="mt-auto flex items-end justify-between gap-3">
+          <div className="flex flex-col gap-1">
+            <div className="text-[11px] uppercase tracking-wide text-zinc-400">Disponibilidad</div>
+            <div className={`text-xs font-medium ${disabled ? "text-red-600" : "text-zinc-600"}`}>
+              {disabled ? "Sin stock" : `Stock: ${product.stock}`}
+            </div>
+          </div>
           <AddToCartButton
             product={{
               id: product.id,
@@ -40,7 +45,7 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
               imageUrl: product.imageUrl,
               stock: product.stock,
             }}
-            className="rounded-full border border-amber-400 bg-amber-400 px-3 py-1.5 text-xs font-semibold text-zinc-900 hover:bg-amber-300 disabled:opacity-40"
+            className="rounded-full border border-amber-400 bg-amber-400 px-3 py-2 text-xs font-semibold text-zinc-900 shadow-sm hover:bg-amber-300 disabled:opacity-40"
           />
         </div>
       </div>

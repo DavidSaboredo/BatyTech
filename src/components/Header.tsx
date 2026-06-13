@@ -8,9 +8,9 @@ export function Header() {
   const { totalQuantity } = useCart();
 
   return (
-    <header className="border-b border-amber-200 bg-white">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center">
+    <header className="sticky top-0 z-40 border-b border-amber-200/80 bg-white/95 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3">
+        <Link href="/" className="flex shrink-0 items-center">
           <Image
             src="/brand/banner.jpeg"
             alt="BatyTech"
@@ -20,16 +20,22 @@ export function Header() {
             className="h-10 w-[260px] object-cover object-[center_-14px] sm:h-12 sm:w-[300px] sm:object-[center_-18px]"
           />
         </Link>
-        <nav className="flex items-center gap-4 text-sm text-zinc-900">
-          <Link href="/" className="hover:text-amber-600 hover:underline underline-offset-4">
+        <nav className="flex items-center gap-2 text-sm text-zinc-900 sm:gap-3">
+          <Link
+            href="/"
+            className="rounded-full px-3 py-2 font-medium hover:bg-amber-50 hover:text-amber-700"
+          >
             Inicio
           </Link>
-          <Link href="/products" className="hover:text-amber-600 hover:underline underline-offset-4">
+          <Link
+            href="/products"
+            className="rounded-full px-3 py-2 font-medium hover:bg-amber-50 hover:text-amber-700"
+          >
             Productos
           </Link>
           <Link
             href="/cart"
-            className="rounded-full border border-amber-300 bg-white px-3 py-1.5 text-zinc-900 hover:border-amber-400 hover:bg-amber-50"
+            className="rounded-full border border-amber-300 bg-white px-3 py-2 font-medium text-zinc-900 shadow-sm hover:border-amber-400 hover:bg-amber-50"
             aria-label="Carrito"
           >
             Carrito ({totalQuantity})

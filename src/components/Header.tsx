@@ -19,7 +19,7 @@ export function Header() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
-            src="/brand/banner.jpeg"
+            src="/imagenes batytech/banner1.png"
             alt="BatysTech"
             width={260}
             height={56}

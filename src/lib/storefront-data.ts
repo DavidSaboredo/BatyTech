@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { prisma } from "@/lib/db";
 import { isDatabaseUnavailableError } from "@/lib/database-errors";
 
@@ -413,7 +414,8 @@ export async function getCatalogStorefrontData(filters: CatalogFilters) {
   }
 }
 
-export async function getStorefrontProductBySlug(slug: string) {
+// cache: generateMetadata y la página comparten la misma consulta en un request.
+export const getStorefrontProductBySlug = cache(async (slug: string) => {
   try {
     const product = await prisma.product.findUnique({
       where: { slug },
@@ -432,4 +434,4 @@ export async function getStorefrontProductBySlug(slug: string) {
       usingFallback: true,
     };
   }
-}
+});

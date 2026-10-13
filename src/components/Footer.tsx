@@ -11,11 +11,11 @@ export function Footer() {
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_repeat(4,minmax(0,1fr))]">
           <div className="flex flex-col gap-4">
             <Image
-              src="/brand/logo.jpeg"
-              alt="Logo BatysTech"
-              width={220}
-              height={48}
-              className="h-10 w-auto object-contain"
+              src="/brand/batystech-logo.png"
+              alt="BatysTech"
+              width={1200}
+              height={143}
+              className="h-auto w-[220px]"
             />
             <div className="flex flex-col gap-1">
               <div className="font-medium text-white">BatysTech · Componentes de PC</div>

@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
 import { performanceTierOptions } from "@/lib/performance-tier";
+import { pageMetadata } from "@/lib/site";
 import { getCatalogStorefrontData } from "@/lib/storefront-data";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Productos",
+  description:
+    "Catálogo de BatysTech: procesadores, placas de video, motherboards, memorias, almacenamiento, fuentes y PCs armadas. Filtrá por categoría, marca o gama.",
+  path: "/products",
+});
 
 type SearchParams = Record<string, string | string[] | undefined>;
 

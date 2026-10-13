@@ -1,14 +1,51 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { getPerformanceTierLabel } from "@/lib/performance-tier";
 import { formatMoney } from "@/lib/money";
+import { defaultOgImage, pageMetadata } from "@/lib/site";
 import { getStorefrontProductBySlug } from "@/lib/storefront-data";
 
 export const dynamic = "force-dynamic";
 
-export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+type ProductPageProps = { params: Promise<{ slug: string }> };
+
+// Foto del producto lista para compartir (1200x630 con fondo blanco si viene de Cloudinary).
+function shareImage(url: string | undefined, alt: string) {
+  if (url && /^https:\/\/res\.cloudinary\.com\/.+\/image\/upload\//.test(url)) {
+    return {
+      url: url.replace("/image/upload/", "/image/upload/c_pad,b_white,w_1200,h_630,f_jpg,q_auto/"),
+      width: 1200,
+      height: 630,
+      alt,
+    };
+  }
+  if (url && /^https?:\/\//.test(url)) return { url, alt };
+  return defaultOgImage;
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const { product } = await getStorefrontProductBySlug(slug);
+  if (!product || !product.isActive) {
+    return { title: "Producto no encontrado", robots: { index: false } };
+  }
+
+  const summary = product.description.replace(/\s+/g, " ").trim();
+  const description = `${formatMoney(product.priceCents)} · ${
+    summary.length > 150 ? `${summary.slice(0, 147).trimEnd()}...` : summary
+  }`;
+  return pageMetadata({
+    title: product.name,
+    description,
+    path: `/products/${product.slug}`,
+    image: shareImage(product.images[0]?.url, product.name),
+  });
+}
+
+export default async function ProductDetailPage({ params }: ProductPageProps) {
   const p = await params;
   const { product, usingFallback } = await getStorefrontProductBySlug(p.slug);
 

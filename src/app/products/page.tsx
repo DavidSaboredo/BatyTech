@@ -51,7 +51,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const activeBrand = brands.find((b) => b.slug === brand);
   const hasFilters = Boolean(category || brand || tier || q);
   const fieldClass =
-    "h-11 w-full min-w-0 rounded-xl border border-zinc-200 bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200";
+    "h-11 w-full min-w-0 rounded-xl border border-zinc-200 bg-white px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200";
 
   return (
     <div className="flex flex-col gap-6 sm:gap-8">

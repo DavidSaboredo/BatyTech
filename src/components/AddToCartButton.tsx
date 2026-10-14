@@ -73,7 +73,7 @@ export function AddToCartButton({
               if (!Number.isFinite(next)) return setQuantity(1);
               setQuantity(Math.max(1, Math.min(maxQuantity, next)));
             }}
-            className="h-10 w-16 rounded-xl border border-zinc-200 px-2 text-center text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            className="h-10 w-16 rounded-xl border border-zinc-200 px-2 text-center text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
           />
           <button
             type="button"

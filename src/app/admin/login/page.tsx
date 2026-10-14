@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
             name="email"
             type="email"
             required
-            className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
             name="password"
             type="password"
             required
-            className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+            className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
           />
         </div>
 

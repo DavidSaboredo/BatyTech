@@ -47,7 +47,7 @@ export function ImageUpload({
                 setUpload({ state: "idle" });
               }}
               placeholder="Pegá una URL o subí una imagen"
-              className="h-11 rounded-xl border border-zinc-200 bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+              className="h-11 rounded-xl border border-zinc-200 bg-white px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
             />
           </div>
           <div className="flex flex-wrap items-center gap-3">

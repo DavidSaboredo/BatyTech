@@ -102,7 +102,7 @@ export default function CartPage() {
                     value={item.quantity}
                     onChange={(e) => setQuantity(item.productId, Number(e.target.value))}
                     aria-label={`Cantidad de ${item.name}`}
-                    className="h-9 w-14 rounded-xl border border-zinc-200 px-2 text-center text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                    className="h-9 w-14 rounded-xl border border-zinc-200 px-2 text-center text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                   />
                   <button
                     type="button"

@@ -96,23 +96,23 @@ export default async function AdminNewProductPage() {
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium">Nombre</label>
-              <input name="name" required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
+              <input name="name" required className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium">SKU</label>
-              <input name="sku" required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
+              <input name="sku" required className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium">Precio (ARS)</label>
-              <input name="priceCents" type="number" min={0} required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
+              <input name="priceCents" type="number" min={0} required className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium">Stock</label>
-              <input name="stock" type="number" min={0} required className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
+              <input name="stock" type="number" min={0} required className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200" />
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium">Categoría</label>
-              <select name="categoryId" required className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200">
+              <select name="categoryId" required className="h-11 rounded-xl border bg-white px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200">
                 <option value="" />
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -124,7 +124,7 @@ export default async function AdminNewProductPage() {
             <div className="grid gap-3 sm:grid-cols-2 sm:col-span-2">
               <div className="flex flex-col gap-1">
                 <label className="text-sm font-medium">Marca existente</label>
-                <select name="brandId" className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <select name="brandId" className="h-11 rounded-xl border bg-white px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200">
                   <option value="">Elegí una marca</option>
                   {brands.map((b) => (
                     <option key={b.id} value={b.id}>
@@ -138,13 +138,13 @@ export default async function AdminNewProductPage() {
                 <input
                   name="brandName"
                   placeholder="Ej: XFX, Zotac, Redragon"
-                  className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                  className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium">Gama de PC</label>
-              <select name="performanceTier" className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200">
+              <select name="performanceTier" className="h-11 rounded-xl border bg-white px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200">
                 <option value="">Sin definir</option>
                 {performanceTierOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -163,7 +163,7 @@ export default async function AdminNewProductPage() {
               name="description"
               required
               rows={5}
-              className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+              className="rounded-xl border px-3 py-2 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
             />
           </div>
 
@@ -174,7 +174,7 @@ export default async function AdminNewProductPage() {
                 name="specs"
                 rows={6}
                 placeholder={"Ej:\nRyzen 7 7700\nRTX 4070 Super\n32GB DDR5\nSSD 1TB"}
-                className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="rounded-xl border px-3 py-2 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -183,7 +183,7 @@ export default async function AdminNewProductPage() {
                 name="fpsGames"
                 rows={6}
                 placeholder={"Ej:\nCS2: 300+ FPS\nWarzone: 140 FPS\nFortnite: 200 FPS"}
-                className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="rounded-xl border px-3 py-2 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
           </div>

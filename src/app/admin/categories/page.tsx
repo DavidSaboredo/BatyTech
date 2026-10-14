@@ -61,7 +61,7 @@ export default async function AdminCategoriesPage() {
             <input
               name="name"
               placeholder="Ej: Procesadores"
-              className="h-11 flex-1 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+              className="h-11 flex-1 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
             />
             <button type="submit" className="h-11 rounded-full border border-amber-400 bg-amber-400 px-5 text-sm font-semibold text-zinc-900 hover:bg-amber-300">
               Crear/Actualizar
@@ -79,7 +79,7 @@ export default async function AdminCategoriesPage() {
                   <input
                     name="name"
                     defaultValue={c.name}
-                    className="h-11 w-full rounded-xl border border-zinc-200 px-3 text-sm font-medium text-zinc-900 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                    className="h-11 w-full rounded-xl border border-zinc-200 px-3 text-base font-medium text-zinc-900 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                   />
                   <div className="mt-1 text-xs text-zinc-600">
                     slug: {c.slug} · productos: {c._count.products}

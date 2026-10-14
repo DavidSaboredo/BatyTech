@@ -107,7 +107,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 name="name"
                 required
                 defaultValue={product.name}
-                className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -116,7 +116,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 name="sku"
                 required
                 defaultValue={product.sku}
-                className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -127,7 +127,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 min={0}
                 required
                 defaultValue={product.priceCents}
-                className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -138,7 +138,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 min={0}
                 required
                 defaultValue={product.stock}
-                className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -147,7 +147,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 name="categoryId"
                 required
                 defaultValue={product.categoryId}
-                className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="h-11 rounded-xl border bg-white px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -162,7 +162,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 <select
                   name="brandId"
                   defaultValue={product.brandId}
-                  className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                  className="h-11 rounded-xl border bg-white px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 >
                   {brands.map((b) => (
                     <option key={b.id} value={b.id}>
@@ -176,7 +176,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 <input
                   name="brandName"
                   placeholder="Escribí una marca nueva si no existe"
-                  className="h-11 rounded-xl border px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                  className="h-11 rounded-xl border px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
             </div>
@@ -185,7 +185,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
               <select
                 name="performanceTier"
                 defaultValue={product.performanceTier || ""}
-                className="h-11 rounded-xl border bg-white px-3 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="h-11 rounded-xl border bg-white px-3 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               >
                 <option value="">Sin definir</option>
                 {performanceTierOptions.map((option) => (
@@ -206,7 +206,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
               required
               rows={6}
               defaultValue={product.description}
-              className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+              className="rounded-xl border px-3 py-2 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
             />
           </div>
 
@@ -217,7 +217,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 name="specs"
                 rows={6}
                 defaultValue={product.specs || ""}
-                className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="rounded-xl border px-3 py-2 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -226,7 +226,7 @@ export default async function AdminEditProductPage({ params }: { params: Promise
                 name="fpsGames"
                 rows={6}
                 defaultValue={product.fpsGames || ""}
-                className="rounded-xl border px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                className="rounded-xl border px-3 py-2 text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
           </div>

@@ -91,7 +91,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
             <div className="text-sm font-semibold">Estado</div>
             <form action={updateStatusAction} className="mt-3 flex flex-col gap-3">
               <input type="hidden" name="id" value={order.id} />
-              <select name="status" defaultValue={order.status} className="h-10 rounded-xl border bg-white px-3 text-sm">
+              <select name="status" defaultValue={order.status} className="h-10 rounded-xl border bg-white px-3 text-base">
                 {orderStatusOptions.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}

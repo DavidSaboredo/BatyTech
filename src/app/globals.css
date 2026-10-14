@@ -13,79 +13,83 @@
   --font-mono: var(--font-geist-mono);
 }
 
-body {
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-}
+/*
+  Estilos por etiqueta dentro de @layer base: así las clases de Tailwind (text-sm, font-semibold, etc.)
+  siempre ganan. Fuera de la capa, `font: inherit` pisaba el tamaño y el peso de todos los botones y links.
+  Los campos de formulario usan text-base (16px) para que Safari en iPhone no haga zoom al tocarlos.
+*/
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-* {
-  box-sizing: border-box;
-}
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-}
+  img,
+  svg {
+    display: block;
+  }
 
-img,
-svg {
-  display: block;
-}
+  *::selection {
+    background: rgba(251, 191, 36, 0.35);
+  }
 
-*::selection {
-  background: rgba(251, 191, 36, 0.35);
-}
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease,
+      transform 0.18s ease;
+    font: inherit;
+  }
 
-a,
-button,
-input,
-select,
-textarea {
-  transition:
-    color 0.18s ease,
-    background-color 0.18s ease,
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    transform 0.18s ease;
-  font: inherit;
-}
+  input,
+  select,
+  textarea {
+    color: #18181b;
+    background-color: #ffffff;
+  }
 
-input,
-select,
-textarea {
-  color: #18181b;
-  background-color: #ffffff;
-}
+  input::placeholder,
+  textarea::placeholder {
+    color: #71717a;
+    opacity: 1;
+  }
 
-input::placeholder,
-textarea::placeholder {
-  color: #a1a1aa;
-  opacity: 1;
-}
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid rgba(245, 158, 11, 0.95);
+    outline-offset: 2px;
+  }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid rgba(245, 158, 11, 0.95);
-  outline-offset: 2px;
-}
+  input[type="number"] {
+    appearance: textfield;
+  }
 
-input[type="number"] {
-  appearance: textfield;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 .surface-card {

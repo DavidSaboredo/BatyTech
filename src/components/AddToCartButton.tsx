@@ -7,26 +7,27 @@ export function AddToCartButton({
   product,
   className,
   showQuantitySelector = false,
+  compact = false,
 }: {
   product: { id: string; name: string; slug: string; priceCents: number; imageUrl: string; stock: number };
   className?: string;
   showQuantitySelector?: boolean;
+  /** En celular muestra "Agregar" para que el botón entre en una línea. */
+  compact?: boolean;
 }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
   const disabled = product.stock <= 0;
   const maxQuantity = Math.max(1, Math.min(product.stock, 99));
-  const [quantity, setQuantity] = useState(1);
+  const [rawQuantity, setQuantity] = useState(1);
+  // Si cambia el stock, la cantidad elegida nunca supera el máximo disponible.
+  const quantity = Math.min(rawQuantity, maxQuantity);
 
   useEffect(() => {
     if (!added) return;
     const id = setTimeout(() => setAdded(false), 1200);
     return () => clearTimeout(id);
   }, [added]);
-
-  useEffect(() => {
-    setQuantity((current) => Math.min(current, maxQuantity));
-  }, [maxQuantity]);
 
   const buttonClassName =
     className ??
@@ -54,7 +55,8 @@ export function AddToCartButton({
           <button
             type="button"
             disabled={disabled || quantity <= 1}
-            onClick={() => setQuantity((current) => Math.max(1, current - 1))}
+            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            aria-label="Restar uno"
             className="h-10 w-10 rounded-full border border-zinc-200 text-sm font-semibold text-zinc-900 hover:border-amber-400 hover:text-amber-600 disabled:opacity-40"
           >
             -
@@ -65,6 +67,7 @@ export function AddToCartButton({
             max={maxQuantity}
             value={quantity}
             disabled={disabled}
+            aria-label="Cantidad"
             onChange={(e) => {
               const next = Math.floor(Number(e.target.value));
               if (!Number.isFinite(next)) return setQuantity(1);
@@ -75,14 +78,15 @@ export function AddToCartButton({
           <button
             type="button"
             disabled={disabled || quantity >= maxQuantity}
-            onClick={() => setQuantity((current) => Math.min(maxQuantity, current + 1))}
+            onClick={() => setQuantity(Math.min(maxQuantity, quantity + 1))}
+            aria-label="Sumar uno"
             className="h-10 w-10 rounded-full border border-zinc-200 text-sm font-semibold text-zinc-900 hover:border-amber-400 hover:text-amber-600 disabled:opacity-40"
           >
             +
           </button>
         </div>
-        <button type="button" disabled={disabled} onClick={handleAdd} className={`${buttonClassName} w-full justify-center sm:w-auto`}>
-          {disabled ? "Sin stock" : added ? "Agregado" : "Agregar al carrito"}
+        <button type="button" disabled={disabled} onClick={handleAdd} aria-live="polite" className={`${buttonClassName} w-full justify-center sm:w-auto`}>
+          {disabled ? "Sin stock" : added ? "¡Agregado!" : "Agregar al carrito"}
         </button>
       </div>
     );
@@ -93,9 +97,21 @@ export function AddToCartButton({
       type="button"
       disabled={disabled}
       onClick={handleAdd}
+      aria-live="polite"
       className={buttonClassName}
     >
-      {disabled ? "Sin stock" : added ? "Agregado" : "Agregar al carrito"}
+      {disabled ? (
+        "Sin stock"
+      ) : added ? (
+        "¡Agregado!"
+      ) : compact ? (
+        <>
+          <span className="sm:hidden">Agregar</span>
+          <span className="max-sm:hidden">Agregar al carrito</span>
+        </>
+      ) : (
+        "Agregar al carrito"
+      )}
     </button>
   );
 }

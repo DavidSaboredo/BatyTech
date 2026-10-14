@@ -1,23 +1,13 @@
 import Image from "next/image";
 
-export type GeekCatStickerName =
-  | "thinking"
-  | "hacking"
-  | "gamerRage"
-  | "victoryDance"
-  | "pixelatedWave"
-  | "workingHard"
-  | "vrExplorer";
+// Solo los stickers de la mascota que no traen texto en inglés ni recortes de otros stickers.
+const stickers = {
+  thinking: { src: "/brand/geekcat/thinking-cat.png", width: 177, height: 184 },
+  error404: { src: "/brand/geekcat/error-404.png", width: 152, height: 163 },
+  coffee: { src: "/brand/geekcat/geek-coffee.png", width: 167, height: 169 },
+} as const;
 
-const stickerSrc: Record<GeekCatStickerName, string> = {
-  thinking: "/brand/geekcat/thinking-cat.png",
-  hacking: "/brand/geekcat/hacking-cat.png",
-  gamerRage: "/brand/geekcat/gamer-rage.png",
-  victoryDance: "/brand/geekcat/victory-dance.png",
-  pixelatedWave: "/brand/geekcat/pixelated-wave.png",
-  workingHard: "/brand/geekcat/working-hard.png",
-  vrExplorer: "/brand/geekcat/vr-explorer.png",
-};
+export type GeekCatStickerName = keyof typeof stickers;
 
 export function GeekCatSticker({
   name,
@@ -30,12 +20,13 @@ export function GeekCatSticker({
   className?: string;
   priority?: boolean;
 }) {
+  const sticker = stickers[name];
   return (
     <Image
-      src={stickerSrc[name]}
+      src={sticker.src}
       alt=""
       width={size}
-      height={size}
+      height={Math.round((size * sticker.height) / sticker.width)}
       className={className}
       priority={priority}
     />

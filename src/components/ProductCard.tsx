@@ -16,34 +16,47 @@ export type ProductCardModel = {
   performanceTier?: string | null;
 };
 
+function stockLabel(stock: number) {
+  if (stock <= 0) return "Sin stock";
+  if (stock === 1) return "Última unidad";
+  if (stock <= 3) return `Últimas ${stock} unidades`;
+  return `${stock} en stock`;
+}
+
 export function ProductCard({ product }: { product: ProductCardModel }) {
   const disabled = product.stock <= 0;
   const performanceTierLabel = getPerformanceTierLabel(product.performanceTier);
+  const href = `/products/${product.slug}`;
 
   return (
-    <div className="surface-card flex h-full flex-col overflow-hidden rounded-3xl">
-      <div className="h-1.5 bg-amber-400" />
-      <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative h-48 w-full bg-zinc-50">
-          <Image src={product.imageUrl} alt={product.name} fill className="object-contain p-8" />
-        </div>
-      </Link>
-      <div className="flex flex-1 flex-col gap-3 p-4">
+    <div className="surface-card group flex h-full flex-col overflow-hidden rounded-2xl sm:rounded-3xl">
+      <div className="h-1 bg-amber-400 sm:h-1.5" />
+      <Link href={href} tabIndex={-1} aria-hidden="true" className="relative block aspect-square w-full bg-zinc-50 sm:aspect-auto sm:h-48">
+        <Image
+          src={product.imageUrl}
+          alt=""
+          fill
+          sizes="(min-width: 1280px) 260px, (min-width: 640px) 45vw, 50vw"
+          className="object-contain p-4 transition-transform duration-300 group-hover:scale-[1.03] sm:p-8"
+        />
         {performanceTierLabel ? (
-          <div className="inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-amber-700">
+          <span className="absolute left-2 top-2 rounded-full bg-zinc-950 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-300 sm:left-3 sm:top-3 sm:px-2.5 sm:py-1 sm:text-[11px]">
             Gama {performanceTierLabel}
-          </div>
+          </span>
         ) : null}
-        <Link href={`/products/${product.slug}`} className="line-clamp-2 min-h-12 text-base font-semibold leading-6 hover:text-amber-700">
+      </Link>
+      <div className="flex flex-1 flex-col gap-2 p-3 sm:gap-3 sm:p-4">
+        <Link
+          href={href}
+          className="line-clamp-2 min-h-10 text-sm font-semibold leading-5 text-zinc-900 hover:text-amber-700 sm:min-h-12 sm:text-base sm:leading-6"
+        >
           {product.name}
         </Link>
-        <div className="text-lg font-semibold text-zinc-900">{formatMoney(product.priceCents)}</div>
-        <div className="mt-auto flex flex-col gap-3">
-          <div className="flex flex-col gap-1">
-            <div className="text-[11px] uppercase tracking-wide text-zinc-400">Disponibilidad</div>
-            <div className={`inline-flex w-fit rounded-full px-2.5 py-1 text-xs font-medium ${disabled ? "bg-red-50 text-red-600" : "bg-zinc-100 text-zinc-700"}`}>
-              {disabled ? "Sin stock" : `${product.stock} en stock`}
-            </div>
+        <div className="text-base font-bold text-zinc-950 sm:text-lg">{formatMoney(product.priceCents)}</div>
+        <div className="mt-auto flex flex-col gap-2 sm:gap-3">
+          <div className={`flex items-center gap-1.5 text-xs font-medium ${disabled ? "text-red-600" : "text-emerald-700"}`}>
+            <span className={`h-1.5 w-1.5 rounded-full ${disabled ? "bg-red-500" : "bg-emerald-500"}`} />
+            {stockLabel(product.stock)}
           </div>
           <AddToCartButton
             product={{
@@ -54,7 +67,8 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
               imageUrl: product.imageUrl,
               stock: product.stock,
             }}
-            className="inline-flex min-h-10 self-start items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-5 py-2 text-sm font-semibold whitespace-nowrap text-white shadow-sm hover:border-amber-400 hover:bg-zinc-950 hover:text-amber-300 disabled:cursor-not-allowed disabled:opacity-40"
+            compact
+            className="inline-flex min-h-10 w-full items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-3 py-2 text-[13px] font-semibold leading-tight text-white shadow-sm hover:border-amber-400 hover:bg-zinc-950 hover:text-amber-300 disabled:cursor-not-allowed disabled:opacity-40 sm:text-sm"
           />
         </div>
       </div>

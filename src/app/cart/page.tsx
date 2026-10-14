@@ -73,18 +73,18 @@ export default function CartPage() {
                 <Image src={productImageUrl(item.imageUrl)} alt="" fill sizes="96px" className="object-contain p-2.5" />
               </Link>
               <div className="flex min-w-0 flex-1 flex-col gap-1">
-                <div className="flex items-start justify-between gap-3">
-                  <Link
-                    href={`/products/${item.slug}`}
-                    className="line-clamp-2 text-sm font-semibold text-zinc-900 hover:text-amber-700 sm:text-base"
-                  >
-                    {item.name}
-                  </Link>
-                  <div className="shrink-0 text-sm font-semibold text-zinc-950 sm:text-base">
+                <Link
+                  href={`/products/${item.slug}`}
+                  className="line-clamp-2 text-sm font-semibold text-zinc-900 hover:text-amber-700 sm:text-base"
+                >
+                  {item.name}
+                </Link>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+                  <span className="text-xs text-zinc-500">{formatMoney(item.priceCents)} c/u</span>
+                  <span className="text-sm font-semibold text-zinc-950 sm:text-base">
                     {formatMoney(item.priceCents * item.quantity)}
-                  </div>
+                  </span>
                 </div>
-                <div className="text-xs text-zinc-500">{formatMoney(item.priceCents)} c/u</div>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <button
                     type="button"

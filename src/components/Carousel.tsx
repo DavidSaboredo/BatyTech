@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { isDemoPhoto } from "@/lib/product-image";
 
 export type CarouselSlide = {
   title: string;
@@ -37,6 +38,7 @@ export function Carousel({ slides, intervalMs = 4500 }: { slides: CarouselSlide[
 
   if (safeSlides.length === 0) return null;
   const slide = safeSlides[index % safeSlides.length]!;
+  const photo = isDemoPhoto(slide.imageUrl);
   const go = (step: number) => setIndex((current) => (current + step + safeSlides.length) % safeSlides.length);
   const arrowClass =
     "absolute top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white/95 text-zinc-900 shadow-sm hover:border-amber-400 hover:text-amber-600";
@@ -49,7 +51,7 @@ export function Carousel({ slides, intervalMs = 4500 }: { slides: CarouselSlide[
       aria-roledescription="carrusel"
       aria-label="Productos destacados"
     >
-      <div className="relative min-h-60 w-full flex-1 bg-zinc-50 sm:min-h-[18rem]">
+      <div className={`relative min-h-60 w-full flex-1 sm:min-h-[18rem] ${photo ? "bg-zinc-950" : "bg-zinc-50"}`}>
         <Link href={slide.href} className="absolute inset-0" tabIndex={-1} aria-hidden="true">
           <Image
             key={slide.imageUrl}
@@ -57,7 +59,7 @@ export function Carousel({ slides, intervalMs = 4500 }: { slides: CarouselSlide[
             alt=""
             fill
             sizes="(min-width: 1024px) 560px, 100vw"
-            className="object-contain p-8 sm:p-10"
+            className={photo ? "object-contain" : "object-contain p-8 sm:p-10"}
             priority
           />
         </Link>

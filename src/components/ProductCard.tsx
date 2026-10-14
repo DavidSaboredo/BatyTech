@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { getPerformanceTierLabel } from "@/lib/performance-tier";
+import { isDemoPhoto } from "@/lib/product-image";
 import { formatMoney } from "@/lib/money";
 
 export type ProductCardModel = {
@@ -27,17 +28,23 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
   const disabled = product.stock <= 0;
   const performanceTierLabel = getPerformanceTierLabel(product.performanceTier);
   const href = `/products/${product.slug}`;
+  const photo = isDemoPhoto(product.imageUrl);
 
   return (
     <div className="surface-card group flex h-full flex-col overflow-hidden rounded-2xl sm:rounded-3xl">
       <div className="h-1 bg-amber-400 sm:h-1.5" />
-      <Link href={href} tabIndex={-1} aria-hidden="true" className="relative block aspect-square w-full bg-zinc-50 sm:aspect-auto sm:h-48">
+      <Link
+        href={href}
+        tabIndex={-1}
+        aria-hidden="true"
+        className={`relative block aspect-square w-full overflow-hidden sm:aspect-auto sm:h-48 ${photo ? "bg-zinc-950" : "bg-zinc-50"}`}
+      >
         <Image
           src={product.imageUrl}
           alt=""
           fill
           sizes="(min-width: 1280px) 260px, (min-width: 640px) 45vw, 50vw"
-          className="object-contain p-4 transition-transform duration-300 group-hover:scale-[1.03] sm:p-8"
+          className={`object-contain transition-transform duration-300 group-hover:scale-[1.03] ${photo ? "" : "p-4 sm:p-8"}`}
         />
         {performanceTierLabel ? (
           <span className="absolute left-2 top-2 rounded-full bg-zinc-950 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-300 sm:left-3 sm:top-3 sm:px-2.5 sm:py-1 sm:text-[11px]">

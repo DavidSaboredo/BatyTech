@@ -18,8 +18,11 @@ type CartContextValue = {
   totalQuantity: number;
   totalCents: number;
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
+  /** Nunca quita el producto: la cantidad mínima es 1. Para quitarlo está removeItem. */
   setQuantity: (productId: string, quantity: number) => void;
   removeItem: (productId: string) => void;
+  /** Vuelve a poner un producto quitado en la misma posición (para "Deshacer"). */
+  restoreItem: (item: CartItem, index: number) => void;
   clear: () => void;
 };
 
@@ -91,13 +94,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         });
       },
       setQuantity: (productId, quantity) => {
-        const qty = clampInt(quantity, 0, 999);
-        setItems((prev) => {
-          if (qty === 0) return prev.filter((x) => x.productId !== productId);
-          return prev.map((x) => (x.productId === productId ? { ...x, quantity: qty } : x));
-        });
+        const qty = clampInt(quantity, 1, 999);
+        setItems((prev) => prev.map((x) => (x.productId === productId ? { ...x, quantity: qty } : x)));
       },
       removeItem: (productId) => setItems((prev) => prev.filter((x) => x.productId !== productId)),
+      restoreItem: (item, index) =>
+        setItems((prev) => {
+          // Si mientras tanto lo volvió a agregar, se suman las cantidades en vez de duplicarlo.
+          if (prev.some((x) => x.productId === item.productId)) {
+            return prev.map((x) =>
+              x.productId === item.productId ? { ...x, quantity: clampInt(x.quantity + item.quantity, 1, 999) } : x,
+            );
+          }
+          const next = [...prev];
+          next.splice(Math.min(Math.max(index, 0), next.length), 0, item);
+          return next;
+        }),
       clear: () => setItems([]),
     };
   }, [items, ready]);

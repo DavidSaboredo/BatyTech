@@ -13,6 +13,8 @@ export type CartItem = {
 
 type CartContextValue = {
   items: CartItem[];
+  /** true cuando ya se leyó el carrito guardado en el navegador. */
+  ready: boolean;
   totalQuantity: number;
   totalCents: number;
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
@@ -33,6 +35,7 @@ function clampInt(value: number, min: number, max: number) {
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -51,15 +54,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         );
       } catch {
         setItems([]);
+      } finally {
+        setReady(true);
       }
     }, 0);
     return () => clearTimeout(id);
   }, []);
 
+  // Se guarda recién después de leer lo guardado; si no, el primer render pisaba el carrito con [].
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    localStorage.setItem(storageKey, JSON.stringify(items));
-  }, [items]);
+    if (!ready) return;
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(items));
+    } catch {
+      // Navegación privada o almacenamiento lleno: el carrito sigue funcionando en memoria.
+    }
+  }, [items, ready]);
 
   const value = useMemo<CartContextValue>(() => {
     const totalQuantity = items.reduce((acc, x) => acc + x.quantity, 0);
@@ -67,6 +77,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     return {
       items,
+      ready,
       totalQuantity,
       totalCents,
       addItem: (item, quantity = 1) => {
@@ -89,13 +100,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       removeItem: (productId) => setItems((prev) => prev.filter((x) => x.productId !== productId)),
       clear: () => setItems([]),
     };
-  }, [items]);
+  }, [items, ready]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart() {
   const ctx = useContext(CartContext);
-  if (!ctx) throw new Error("useCart must be used within CartProvider");
+  if (!ctx) throw new Error("useCart tiene que usarse dentro de CartProvider");
   return ctx;
 }

@@ -95,7 +95,7 @@ const demoProducts: StoreProduct[] = [
     specs: "AMD Ryzen 5 5600\nNVIDIA GeForce RTX 4060 8GB\n16GB DDR4 3200\nSSD NVMe 1TB\nFuente 650W 80+ Bronze",
     fpsGames:
       "Counter-Strike 2: 220+ FPS en 1080p competitivo\nFortnite: 140 FPS en 1080p alto\nWarzone: 95 FPS en 1080p balanceado\nGTA V Enhanced: 120 FPS en 1080p muy alto",
-    images: [image("img-pc-entry", "/demo/pc-build.svg", "PC Gamer Entrada")],
+    images: [image("img-pc-entry", "/productos/pc-gamer-entrada.webp", "PC gamer armada con vidrio templado e iluminación RGB")],
     isActive: true,
   }),
   product({
@@ -113,7 +113,7 @@ const demoProducts: StoreProduct[] = [
     specs: "AMD Ryzen 7 7700\nNVIDIA GeForce RTX 4070 Super 12GB\n32GB DDR5 6000\nSSD NVMe 1TB\nRefrigeración por aire premium",
     fpsGames:
       "Counter-Strike 2: 300+ FPS en 1080p competitivo\nFortnite: 200 FPS en 1440p alto\nWarzone: 140 FPS en 1440p balanceado\nCyberpunk 2077: 95 FPS en 1440p alto con DLSS",
-    images: [image("img-pc-mid", "/demo/pc-build.svg", "PC Gamer Media")],
+    images: [image("img-pc-mid", "/productos/pc-gamer-media.webp", "Interior de una PC gamer armada con iluminación violeta")],
     isActive: true,
   }),
   product({
@@ -131,7 +131,7 @@ const demoProducts: StoreProduct[] = [
     specs: "AMD Ryzen 7 7800X3D\nNVIDIA GeForce RTX 4080 Super 16GB\n32GB DDR5 6000\nSSD NVMe 2TB\nFuente 850W Gold",
     fpsGames:
       "Counter-Strike 2: 400+ FPS en 1080p competitivo\nFortnite: 240 FPS en 1440p epico\nWarzone: 190 FPS en 1440p competitivo\nBlack Myth Wukong: 90 FPS en 4K alto con DLSS",
-    images: [image("img-pc-high", "/demo/pc-build.svg", "PC Gamer Alta")],
+    images: [image("img-pc-high", "/productos/pc-gamer-alta.webp", "Interior de una PC gamer con cooler torre y ventiladores")],
     isActive: true,
   }),
   product({
@@ -148,7 +148,7 @@ const demoProducts: StoreProduct[] = [
     description: "Procesador 6 nucleos / 12 hilos ideal para gaming y productividad. Excelente relacion precio/rendimiento.",
     specs: null,
     fpsGames: null,
-    images: [image("img-cpu-5600", "/demo/cpu.svg", "AMD Ryzen 5 5600")],
+    images: [image("img-cpu-5600", "/productos/amd-ryzen-5-5600.webp", "Procesador AMD Ryzen")],
     isActive: true,
   }),
   product({
@@ -165,7 +165,7 @@ const demoProducts: StoreProduct[] = [
     description: "6 nucleos / 12 hilos con gran desempeno en juegos. Requiere GPU dedicada.",
     specs: null,
     fpsGames: null,
-    images: [image("img-cpu-12400f", "/demo/cpu.svg", "Intel Core i5 12400F")],
+    images: [image("img-cpu-12400f", "/productos/intel-core-i5-12400f.webp", "Procesador Intel Core i5-12400F")],
     isActive: true,
   }),
   product({
@@ -182,7 +182,7 @@ const demoProducts: StoreProduct[] = [
     description: "GPU eficiente para 1080p/1440p, con soporte para tecnologías modernas de renderizado.",
     specs: null,
     fpsGames: null,
-    images: [image("img-gpu-4060", "/demo/gpu.svg", "RTX 4060")],
+    images: [image("img-gpu-4060", "/productos/geforce-rtx-4060.webp", "Placa de video GeForce RTX")],
     isActive: true,
   }),
   product({
@@ -199,7 +199,7 @@ const demoProducts: StoreProduct[] = [
     description: "Motherboard AM4 con buen VRM, conectividad WiFi y compatibilidad con Ryzen 3000/5000.",
     specs: null,
     fpsGames: null,
-    images: [image("img-mb-b550", "/demo/motherboard.svg", "MSI B550M")],
+    images: [image("img-mb-b550", "/productos/motherboard-b550m.webp", "Zócalo AM4 de una motherboard")],
     isActive: true,
   }),
   product({
@@ -216,7 +216,7 @@ const demoProducts: StoreProduct[] = [
     description: "Motherboard LGA1700 para Intel 12/13/14th gen, ideal para armado equilibrado.",
     specs: null,
     fpsGames: null,
-    images: [image("img-mb-b760", "/demo/motherboard.svg", "ASUS PRIME B760M-A")],
+    images: [image("img-mb-b760", "/productos/motherboard-b760m.webp", "Zócalo de procesador y ranuras de memoria de una motherboard")],
     isActive: true,
   }),
   product({
@@ -233,7 +233,7 @@ const demoProducts: StoreProduct[] = [
     description: "Kit dual channel DDR4 3200MHz para gaming y multitarea.",
     specs: null,
     fpsGames: null,
-    images: [image("img-ram-kingston", "/demo/ram.svg", "Kingston Fury DDR4")],
+    images: [image("img-ram-kingston", "/productos/memoria-ddr4.webp", "Módulo de memoria RAM")],
     isActive: true,
   }),
   product({
@@ -250,7 +250,7 @@ const demoProducts: StoreProduct[] = [
     description: "DDR5 de alto rendimiento para plataformas modernas. Excelente para productividad y juegos.",
     specs: null,
     fpsGames: null,
-    images: [image("img-ram-corsair", "/demo/ram.svg", "Corsair Vengeance DDR5")],
+    images: [image("img-ram-corsair", "/productos/memoria-ddr5.webp", "Chips de un módulo de memoria RAM")],
     isActive: true,
   }),
   product({
@@ -267,7 +267,7 @@ const demoProducts: StoreProduct[] = [
     description: "SSD NVMe 1TB rápido para sistema y juegos. Mejora los tiempos de carga.",
     specs: null,
     fpsGames: null,
-    images: [image("img-storage-990evo", "/demo/storage.svg", "Samsung 990 EVO")],
+    images: [image("img-storage-990evo", "/productos/ssd-nvme.webp", "Unidad SSD NVMe M.2")],
     isActive: true,
   }),
   product({
@@ -284,7 +284,7 @@ const demoProducts: StoreProduct[] = [
     description: "Fuente 650W 80+ Bronze para builds de gama media, con buena eficiencia.",
     specs: null,
     fpsGames: null,
-    images: [image("img-psu-650", "/demo/psu.svg", "Cooler Master 650W")],
+    images: [image("img-psu-650", "/productos/fuente-650w.webp", "Fuente de alimentación ATX con ventilador")],
     isActive: true,
   }),
   product({
@@ -301,7 +301,7 @@ const demoProducts: StoreProduct[] = [
     description: "Gabinete con buen airflow y panel lateral de vidrio templado para tu setup.",
     specs: null,
     fpsGames: null,
-    images: [image("img-case-mid", "/demo/case.svg", "Gabinete Mid Tower")],
+    images: [image("img-case-mid", "/productos/gabinete-mid-tower.webp", "Gabinete mid tower con frente de vidrio templado")],
     isActive: true,
   }),
   product({
@@ -318,7 +318,7 @@ const demoProducts: StoreProduct[] = [
     description: "Disipador tipo torre 120mm para mantener bajas temperaturas en CPUs populares.",
     specs: null,
     fpsGames: null,
-    images: [image("img-cooler-tower", "/demo/cooling.svg", "Cooler CPU Torre")],
+    images: [image("img-cooler-tower", "/productos/cooler-torre-120.webp", "Cooler de CPU tipo torre con ventilador de 120 mm")],
     isActive: true,
   }),
 ];

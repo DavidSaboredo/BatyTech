@@ -1,8 +1,6 @@
+// wa.me necesita solo dígitos: se quitan "+", espacios y guiones (ej: "+54 9 11 1234-5678").
 export function normalizeWhatsAppNumber(input: string) {
-  const trimmed = input.trim();
-  if (!trimmed) return "";
-  if (trimmed.startsWith("+")) return trimmed.slice(1);
-  return trimmed.replaceAll(/\s+/g, "");
+  return input.replace(/\D/g, "");
 }
 
 export function buildWhatsAppMessage(args: {
@@ -14,17 +12,17 @@ export function buildWhatsAppMessage(args: {
   formatMoney: (cents: number) => string;
 }) {
   const lines: string[] = [];
-  lines.push(`Hola! Quiero confirmar una compra en ${args.storeName}.`);
-  lines.push(`Orden: ${args.orderId}`);
+  lines.push(`¡Hola ${args.storeName}! Quiero confirmar este pedido.`);
+  lines.push(`Pedido: ${args.orderId}`);
   lines.push("");
   lines.push(`Nombre: ${args.customer.customerName}`);
   lines.push(`Email: ${args.customer.email}`);
-  if (args.customer.phone) lines.push(`Tel: ${args.customer.phone}`);
+  if (args.customer.phone) lines.push(`Teléfono: ${args.customer.phone}`);
   if (args.customer.address) lines.push(`Dirección: ${args.customer.address}`);
   lines.push("");
-  lines.push("Items:");
+  lines.push("Productos:");
   for (const item of args.items) {
-    lines.push(`- ${item.name} x${item.quantity} (${args.formatMoney(item.unitPriceCents)})`);
+    lines.push(`- ${item.quantity} x ${item.name} (${args.formatMoney(item.unitPriceCents)} c/u)`);
   }
   lines.push("");
   lines.push(`Total: ${args.formatMoney(args.totalCents)}`);

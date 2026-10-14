@@ -16,7 +16,7 @@ function isEmailLike(value: string) {
 }
 
 export async function POST(req: Request) {
-  const body = (await req.json()) as CreateOrderBody;
+  const body = (await req.json().catch(() => null)) as CreateOrderBody | null;
   const email = body?.customer?.email?.trim();
   const customerName = body?.customer?.customerName?.trim();
   const phone = body?.customer?.phone?.trim() || null;
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
   const items = Array.isArray(body?.items) ? body.items : [];
 
   if (!email || !customerName || !isEmailLike(email) || items.length === 0) {
-    return Response.json({ error: "Datos inválidos" }, { status: 400 });
+    return Response.json({ error: "Revisá tus datos: el nombre y un email válido son obligatorios." }, { status: 400 });
   }
 
   const normalizedItems = items
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     .filter((x) => x.productId && Number.isFinite(x.quantity) && x.quantity > 0 && x.quantity <= 999);
 
   if (normalizedItems.length === 0) {
-    return Response.json({ error: "Carrito vacío" }, { status: 400 });
+    return Response.json({ error: "Tu carrito está vacío." }, { status: 400 });
   }
 
   try {
@@ -86,17 +86,17 @@ export async function POST(req: Request) {
     return Response.json({ orderId: order.id });
   } catch (err) {
     if (err instanceof Error && err.message === "invalid_product") {
-      return Response.json({ error: "Producto inválido" }, { status: 400 });
+      return Response.json({ error: "Uno de los productos ya no está disponible. Revisá tu carrito." }, { status: 400 });
     }
     if (err instanceof Error && err.message === "insufficient_stock") {
-      return Response.json({ error: "Stock insuficiente" }, { status: 409 });
+      return Response.json({ error: "No hay stock suficiente de uno de los productos. Ajustá las cantidades en el carrito." }, { status: 409 });
     }
     if (isDatabaseUnavailableError(err)) {
       return Response.json(
-        { error: "La base de datos local no está conectada. Configurá Neon para completar pedidos reales." },
+        { error: "No pudimos registrar el pedido en este momento. Probá de nuevo en unos minutos." },
         { status: 503 },
       );
     }
-    return Response.json({ error: "Error creando la orden" }, { status: 500 });
+    return Response.json({ error: "No pudimos generar el pedido. Probá de nuevo en unos minutos." }, { status: 500 });
   }
 }

@@ -25,7 +25,7 @@ async function createProductAction(formData: FormData) {
   const performanceTier = toPerformanceTier(formData.get("performanceTier"));
   const specs = String(formData.get("specs") || "").trim() || null;
   const fpsGames = String(formData.get("fpsGames") || "").trim() || null;
-  const imageUrl = String(formData.get("imageUrl") || "").trim() || "/window.svg";
+  const imageUrl = String(formData.get("imageUrl") || "").trim() || "/brand/sin-foto.svg";
   const featured = formData.get("featured") === "on";
   const isActive = formData.get("isActive") === "on";
   const resolvedBrandId = await resolveBrandId({ brandId, brandName });
@@ -155,7 +155,7 @@ export default async function AdminNewProductPage() {
             </div>
           </div>
 
-          <ImageUpload name="imageUrl" defaultValue="/window.svg" label="Imagen" />
+          <ImageUpload name="imageUrl" defaultValue="/brand/sin-foto.svg" label="Imagen" />
 
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Descripción</label>

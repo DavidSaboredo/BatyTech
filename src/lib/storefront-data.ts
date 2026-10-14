@@ -48,7 +48,7 @@ const demoCategories: StoreCategory[] = [
   { id: "almacenamiento", name: "Almacenamiento", slug: "almacenamiento" },
   { id: "fuentes", name: "Fuentes", slug: "fuentes" },
   { id: "gabinetes", name: "Gabinetes", slug: "gabinetes" },
-  { id: "refrigeracion", name: "Refrigeracion", slug: "refrigeracion" },
+  { id: "refrigeracion", name: "Refrigeración", slug: "refrigeracion" },
 ];
 
 const demoBrands: StoreBrand[] = [
@@ -109,8 +109,8 @@ const demoProducts: StoreProduct[] = [
     brandSlug: "batytech",
     featured: true,
     performanceTier: "MID",
-    description: "PC orientada a 1440p de alta calidad para gaming competitivo y titulos AAA con excelente fluidez.",
-    specs: "AMD Ryzen 7 7700\nNVIDIA GeForce RTX 4070 Super 12GB\n32GB DDR5 6000\nSSD NVMe 1TB\nRefrigeracion por aire premium",
+    description: "PC orientada a 1440p de alta calidad para gaming competitivo y títulos AAA con excelente fluidez.",
+    specs: "AMD Ryzen 7 7700\nNVIDIA GeForce RTX 4070 Super 12GB\n32GB DDR5 6000\nSSD NVMe 1TB\nRefrigeración por aire premium",
     fpsGames:
       "Counter-Strike 2: 300+ FPS en 1080p competitivo\nFortnite: 200 FPS en 1440p alto\nWarzone: 140 FPS en 1440p balanceado\nCyberpunk 2077: 95 FPS en 1440p alto con DLSS",
     images: [image("img-pc-mid", "/demo/pc-build.svg", "PC Gamer Media")],
@@ -179,7 +179,7 @@ const demoProducts: StoreProduct[] = [
     brandSlug: "nvidia",
     featured: true,
     performanceTier: null,
-    description: "GPU eficiente para 1080p/1440p, con soporte para tecnologias modernas de renderizado.",
+    description: "GPU eficiente para 1080p/1440p, con soporte para tecnologías modernas de renderizado.",
     specs: null,
     fpsGames: null,
     images: [image("img-gpu-4060", "/demo/gpu.svg", "RTX 4060")],
@@ -264,7 +264,7 @@ const demoProducts: StoreProduct[] = [
     brandSlug: "samsung",
     featured: true,
     performanceTier: null,
-    description: "SSD NVMe 1TB rapido para sistema y juegos. Mejora los tiempos de carga.",
+    description: "SSD NVMe 1TB rápido para sistema y juegos. Mejora los tiempos de carga.",
     specs: null,
     fpsGames: null,
     images: [image("img-storage-990evo", "/demo/storage.svg", "Samsung 990 EVO")],

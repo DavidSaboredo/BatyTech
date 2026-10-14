@@ -151,7 +151,7 @@ async function main() {
       description:
         "PC orientada a 1440p de alta calidad para gaming competitivo y títulos AAA con excelente fluidez.",
       specs:
-        "AMD Ryzen 7 7700\nNVIDIA GeForce RTX 4070 Super 12GB\n32GB DDR5 6000\nSSD NVMe 1TB\nRefrigeracion por aire premium",
+        "AMD Ryzen 7 7700\nNVIDIA GeForce RTX 4070 Super 12GB\n32GB DDR5 6000\nSSD NVMe 1TB\nRefrigeración por aire premium",
       fpsGames:
         "Counter-Strike 2: 300+ FPS en 1080p competitivo\nFortnite: 200 FPS en 1440p alto\nWarzone: 140 FPS en 1440p balanceado\nCyberpunk 2077: 95 FPS en 1440p alto con DLSS",
       images: [{ url: "/demo/pc-build.svg", alt: "PC Gamer Media" }],

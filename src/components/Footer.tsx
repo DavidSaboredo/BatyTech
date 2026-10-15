@@ -77,7 +77,7 @@ export function Footer() {
           <span>
             Sitio hecho por{" "}
             <a
-              href="https://david-dev-ar.vercel.app"
+              href="https://laruzo-dev.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
               className="text-zinc-300 underline-offset-4 hover:text-amber-300 hover:underline"

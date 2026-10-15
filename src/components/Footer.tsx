@@ -82,7 +82,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="text-zinc-300 underline-offset-4 hover:text-amber-300 hover:underline"
             >
-              David Saboredo
+              laruzo-dev
             </a>
           </span>
         </div>

@@ -74,6 +74,17 @@ export function Footer() {
         <div className="flex flex-col gap-1 border-t border-zinc-800 pt-4 text-xs text-zinc-400 sm:flex-row sm:justify-between">
           <span>© {year} BatysTech. Todos los derechos reservados.</span>
           <span>Precios en pesos argentinos.</span>
+          <span>
+            Sitio hecho por{" "}
+            <a
+              href="https://david-dev-ar.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-300 underline-offset-4 hover:text-amber-300 hover:underline"
+            >
+              David Saboredo
+            </a>
+          </span>
         </div>
       </div>
     </footer>

@@ -75,7 +75,7 @@ export function ProductCard({ product }: { product: ProductCardModel }) {
               stock: product.stock,
             }}
             compact
-            className="inline-flex min-h-10 w-full items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-3 py-2 text-[13px] font-semibold leading-tight text-white shadow-sm hover:border-amber-400 hover:bg-zinc-950 hover:text-amber-300 disabled:cursor-not-allowed disabled:opacity-40 sm:text-sm"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-3 py-2 text-[13px] font-semibold leading-tight text-white shadow-sm hover:border-amber-400 hover:bg-zinc-950 hover:text-amber-300 disabled:cursor-not-allowed disabled:opacity-40 sm:text-sm"
           />
         </div>
       </div>

@@ -41,7 +41,7 @@ export function Carousel({ slides, intervalMs = 4500 }: { slides: CarouselSlide[
   const photo = isDemoPhoto(slide.imageUrl);
   const go = (step: number) => setIndex((current) => (current + step + safeSlides.length) % safeSlides.length);
   const arrowClass =
-    "absolute top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white/95 text-zinc-900 shadow-sm hover:border-amber-400 hover:text-amber-600";
+    "absolute top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white/95 text-zinc-900 shadow-sm hover:border-amber-400 hover:text-amber-600";
 
   return (
     <div
@@ -71,16 +71,21 @@ export function Carousel({ slides, intervalMs = 4500 }: { slides: CarouselSlide[
             <button type="button" onClick={() => go(1)} className={`${arrowClass} right-3`} aria-label="Producto siguiente">
               <Chevron direction="right" />
             </button>
-            <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5 rounded-full border border-zinc-200 bg-white/95 px-2.5 py-1.5 shadow-sm">
+            <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center rounded-full border border-zinc-200 bg-white/95 px-1.5 shadow-sm">
               {safeSlides.map((item, i) => (
+                // El punto se ve chico, pero el área para tocarlo es más grande.
                 <button
                   key={item.href}
                   type="button"
                   onClick={() => setIndex(i)}
-                  className={`h-2 rounded-full ${i === index ? "w-5 bg-amber-400" : "w-2 bg-zinc-300 hover:bg-zinc-400"}`}
+                  className="group/dot flex h-6 items-center px-[3px]"
                   aria-label={`Ver ${item.title}`}
                   aria-current={i === index}
-                />
+                >
+                  <span
+                    className={`block h-2 rounded-full ${i === index ? "w-5 bg-amber-400" : "w-2 bg-zinc-300 group-hover/dot:bg-zinc-400"}`}
+                  />
+                </button>
               ))}
             </div>
           </>

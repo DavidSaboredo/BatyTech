@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "postinstall": "prisma generate",
-    "build": "next build",
+    "build": "tsx scripts/actualizar-fotos-demo.ts --solo-produccion && next build",
     "start": "next start",
     "lint": "eslint",
     "db:generate": "prisma generate",

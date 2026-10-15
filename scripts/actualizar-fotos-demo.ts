@@ -6,6 +6,8 @@
 //   npm run db:fotos-demo                              aplica los cambios
 //   npm run db:fotos-demo -- --env .env.production.local --simular
 //                                                      usa otro archivo de variables
+//   tsx scripts/actualizar-fotos-demo.ts --solo-produccion
+//                                                      lo usa el build: aplica solo en la publicación de producción de Vercel
 import { config } from "dotenv";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../prisma/generated/prisma/client";
@@ -15,6 +17,11 @@ const args = process.argv.slice(2);
 const simular = args.includes("--simular");
 const envIndex = args.indexOf("--env");
 const envPath = envIndex >= 0 ? args[envIndex + 1] : undefined;
+
+if (args.includes("--solo-produccion") && process.env.VERCEL_ENV !== "production") {
+  console.log("Fotos de ejemplo: fuera de la producción de Vercel, no se toca la base.");
+  process.exit(0);
+}
 
 if (envIndex >= 0 && !envPath) {
   console.error("Falta el archivo después de --env (por ejemplo: --env .env.production.local)");

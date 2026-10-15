@@ -5,6 +5,13 @@ import { useMemo, useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { GeekCatSticker } from "@/components/GeekCatSticker";
 import { formatMoney } from "@/lib/money";
+import {
+  deliveryLabels,
+  shippingCostFor,
+  storeTerms,
+  transferPrice,
+  type DeliveryMethod,
+} from "@/lib/store-terms";
 import { buildWhatsAppLink, buildWhatsAppMessage } from "@/lib/whatsapp";
 
 type Status =
@@ -22,9 +29,37 @@ const fieldClass =
 
 const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
 
+/** Subtotal, entrega y total: se usa en el resumen lateral y, en celular, arriba del botón. */
+function Totals({ subtotal, shipping, delivery }: { subtotal: number; shipping: number; delivery: DeliveryMethod }) {
+  return (
+    <div className="flex flex-col gap-2 text-sm">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-zinc-600">Productos</span>
+        <span className="font-medium text-zinc-900">{formatMoney(subtotal)}</span>
+      </div>
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-zinc-600">{delivery === "pickup" ? "Retiro en el local" : "Envío"}</span>
+        <span className="font-medium text-zinc-900">{shipping > 0 ? formatMoney(shipping) : "Sin cargo"}</span>
+      </div>
+      <div className="mt-1 flex items-baseline justify-between gap-3 border-t border-zinc-200 pt-3">
+        <span className="text-zinc-600">Total</span>
+        <span className="text-xl font-bold text-zinc-950">{formatMoney(subtotal + shipping)}</span>
+      </div>
+      {storeTerms.transferDiscountPercent > 0 ? (
+        <p className="text-right text-xs text-zinc-500">
+          o {formatMoney(transferPrice(subtotal) + shipping)} pagando por transferencia
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 export default function CheckoutPage() {
   const { items, ready, totalCents, totalQuantity, clear, syncStock } = useCart();
   const [status, setStatus] = useState<Status>({ state: "idle" });
+  const [delivery, setDelivery] = useState<DeliveryMethod>("shipping");
+  const shippingFee = shippingCostFor(totalCents);
+  const shipping = delivery === "shipping" ? shippingFee : 0;
 
   const payloadItems = useMemo(
     () => items.map((x) => ({ productId: x.productId, quantity: x.quantity })),
@@ -109,6 +144,12 @@ export default function CheckoutPage() {
                 setStatus({ state: "error", message: "Completá tu nombre, teléfono y email." });
                 return;
               }
+              if (delivery === "shipping" && !address) {
+                setStatus({ state: "error", message: "Completá la dirección de envío o elegí retiro en el local." });
+                return;
+              }
+              const deliveryLabel = deliveryLabels[delivery];
+              const deliveryAddress = delivery === "shipping" ? address : "";
               // Se revisa antes de generar el pedido para no descontar stock sin poder avisarle a la tienda.
               if (!buildWhatsAppLink({ number: whatsappNumber, message: "" })) {
                 setStatus({
@@ -124,7 +165,13 @@ export default function CheckoutPage() {
                   method: "POST",
                   headers: { "content-type": "application/json" },
                   body: JSON.stringify({
-                    customer: { customerName, email, phone, address },
+                    // El pedido guarda la entrega junto a la dirección para que se vea en el panel.
+                    customer: {
+                      customerName,
+                      email,
+                      phone,
+                      address: deliveryAddress ? `${deliveryLabel}: ${deliveryAddress}` : deliveryLabel,
+                    },
                     items: payloadItems,
                   }),
                 });
@@ -148,7 +195,8 @@ export default function CheckoutPage() {
                 const message = buildWhatsAppMessage({
                   storeName: "BatysTech",
                   orderId,
-                  customer: { customerName, email, phone, address },
+                  customer: { customerName, email, phone, address: deliveryAddress },
+                  delivery: { label: deliveryLabel, cost: shipping },
                   items: items.map((i) => ({
                     name: i.name,
                     quantity: i.quantity,
@@ -205,18 +253,58 @@ export default function CheckoutPage() {
                   className={fieldClass}
                 />
               </div>
-              <div className="flex flex-col gap-1.5 sm:col-span-2">
-                <label htmlFor="checkout-address" className="text-sm font-medium text-zinc-800">
-                  Dirección de envío <span className="font-normal text-zinc-500">(opcional)</span>
-                </label>
-                <input
-                  id="checkout-address"
-                  name="address"
-                  autoComplete="street-address"
-                  placeholder="Calle, número y localidad"
-                  className={fieldClass}
-                />
-              </div>
+              <fieldset className="flex flex-col gap-2 sm:col-span-2">
+                <legend className="mb-1.5 text-sm font-medium text-zinc-800">Entrega</legend>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {(["shipping", "pickup"] as const).map((method) => (
+                    <label
+                      key={method}
+                      className={`flex min-h-11 cursor-pointer items-start gap-3 rounded-xl border px-3 py-2.5 ${
+                        delivery === method
+                          ? "border-amber-400 bg-amber-50 ring-2 ring-amber-200"
+                          : "border-zinc-200 bg-white hover:border-zinc-400"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="delivery"
+                        value={method}
+                        checked={delivery === method}
+                        onChange={() => setDelivery(method)}
+                        className="mt-0.5 h-5 w-5 shrink-0 accent-zinc-900"
+                      />
+                      <span className="flex flex-col">
+                        <span className="text-sm font-semibold text-zinc-900">{deliveryLabels[method]}</span>
+                        <span className="text-xs leading-5 text-zinc-600">
+                          {method === "shipping"
+                            ? `${shippingFee > 0 ? formatMoney(shippingFee) : "Gratis"} · llega en ${storeTerms.shippingTime}`
+                            : "Sin cargo · coordinamos día y horario por WhatsApp"}
+                        </span>
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+              {delivery === "shipping" ? (
+                <div className="flex flex-col gap-1.5 sm:col-span-2">
+                  <label htmlFor="checkout-address" className="text-sm font-medium text-zinc-800">
+                    Dirección de envío
+                  </label>
+                  <input
+                    id="checkout-address"
+                    name="address"
+                    autoComplete="street-address"
+                    placeholder="Calle, número y localidad"
+                    required
+                    className={fieldClass}
+                  />
+                </div>
+              ) : null}
+            </div>
+
+            {/* En celular el resumen queda abajo de todo: se repite el total arriba del botón. */}
+            <div className="rounded-2xl bg-zinc-50 px-4 py-3 lg:hidden">
+              <Totals subtotal={totalCents} shipping={shipping} delivery={delivery} />
             </div>
 
             {status.state === "error" ? (
@@ -225,13 +313,18 @@ export default function CheckoutPage() {
               </div>
             ) : null}
 
+            <p className="text-sm leading-6 text-zinc-600">
+              <strong className="font-semibold text-zinc-900">No pagás ahora.</strong> Reservamos el stock y por WhatsApp
+              coordinamos el pago y la entrega.
+            </p>
+
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
               <button type="submit" disabled={status.state === "submitting"} className={primaryButton}>
                 {status.state === "submitting" ? "Generando pedido..." : "Confirmar pedido por WhatsApp"}
               </button>
               <Link
                 href="/cart"
-                className="text-center text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4"
+                className="inline-flex min-h-11 items-center justify-center text-sm text-zinc-600 hover:text-amber-600 hover:underline underline-offset-4"
               >
                 Volver al carrito
               </Link>
@@ -253,12 +346,13 @@ export default function CheckoutPage() {
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex items-center justify-between border-t border-zinc-200 pt-4">
-            <span className="text-sm text-zinc-600">Total</span>
-            <span className="text-xl font-bold text-zinc-950">{formatMoney(totalCents)}</span>
+          <div className="mt-4 border-t border-zinc-200 pt-4 max-lg:hidden">
+            <Totals subtotal={totalCents} shipping={shipping} delivery={delivery} />
           </div>
           <p className="mt-3 text-xs leading-5 text-zinc-500">
-            Al confirmar reservamos el stock y se abre WhatsApp con el detalle. Por ahí coordinamos el pago y la entrega.
+            Pagás después, por transferencia o con tarjeta
+            {storeTerms.installments > 1 ? ` en hasta ${storeTerms.installments} cuotas sin interés` : ""}. Todos los
+            productos tienen {storeTerms.warrantyMonths} meses de garantía.
           </p>
         </div>
       </div>

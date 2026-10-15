@@ -7,6 +7,7 @@ import { maxAvailableLabel, maxCartQuantity, useCart, type CartItem } from "@/co
 import { GeekCatSticker } from "@/components/GeekCatSticker";
 import { formatMoney } from "@/lib/money";
 import { productImageUrl } from "@/lib/product-image";
+import { shippingCostFor, storeTerms, transferPrice } from "@/lib/store-terms";
 
 const qtyButton =
   "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-zinc-200 text-lg font-semibold text-zinc-900 hover:border-amber-400 hover:text-amber-600 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-zinc-200 disabled:hover:text-zinc-900";
@@ -217,14 +218,30 @@ export default function CartPage() {
 
         <div className="surface-card rounded-3xl p-5 lg:sticky lg:top-24">
           <div className="text-sm font-semibold text-zinc-900">Resumen</div>
-          <div className="mt-3 flex items-center justify-between text-sm text-zinc-600">
-            <span>Productos</span>
-            <span>{totalQuantity}</span>
-          </div>
-          <div className="mt-3 flex items-center justify-between border-t border-zinc-200 pt-3">
-            <span className="text-sm text-zinc-600">Total</span>
+          <div className="mt-3 flex items-baseline justify-between gap-3">
+            <span className="text-sm text-zinc-600">
+              Subtotal · {totalQuantity} {totalQuantity === 1 ? "producto" : "productos"}
+            </span>
             <span className="text-xl font-bold text-zinc-950">{formatMoney(totalCents)}</span>
           </div>
+          {storeTerms.transferDiscountPercent > 0 ? (
+            <p className="mt-1 text-right text-xs text-zinc-500">
+              o {formatMoney(transferPrice(totalCents))} pagando por transferencia
+            </p>
+          ) : null}
+          <p className="mt-3 border-t border-zinc-200 pt-3 text-sm leading-6 text-zinc-600">
+            {shippingCostFor(totalCents) === 0 ? (
+              <>
+                <span className="font-semibold text-zinc-900">Envío gratis</span> o retiro sin cargo.
+              </>
+            ) : (
+              <>
+                Envío <span className="font-semibold text-zinc-900">{formatMoney(storeTerms.shippingCost)}</span> o
+                retiro sin cargo.
+              </>
+            )}{" "}
+            Lo elegís en el siguiente paso.
+          </p>
           <Link
             href="/checkout"
             className="mt-4 flex min-h-11 w-full items-center justify-center rounded-full border border-zinc-900 bg-zinc-900 px-5 text-sm font-semibold text-white hover:border-amber-400 hover:text-amber-300"
@@ -238,7 +255,8 @@ export default function CartPage() {
             Seguir comprando
           </Link>
           <p className="mt-3 text-xs leading-5 text-zinc-500">
-            El precio final y el stock se confirman al generar el pedido.
+            <span className="font-semibold text-zinc-700">No pagás ahora.</span> Confirmás el pedido y coordinamos el pago
+            y la entrega por WhatsApp.
           </p>
         </div>
       </div>

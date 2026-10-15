@@ -8,7 +8,10 @@ export function buildWhatsAppMessage(args: {
   orderId: string;
   customer: { customerName: string; email: string; phone?: string; address?: string };
   items: { name: string; quantity: number; unitPriceCents: number }[];
+  /** Subtotal de los productos (sin envío). */
   totalCents: number;
+  /** Forma de entrega elegida y su costo (0 si es sin cargo). */
+  delivery?: { label: string; cost: number };
   formatMoney: (cents: number) => string;
 }) {
   const lines: string[] = [];
@@ -18,6 +21,7 @@ export function buildWhatsAppMessage(args: {
   lines.push(`Nombre: ${args.customer.customerName}`);
   lines.push(`Email: ${args.customer.email}`);
   if (args.customer.phone) lines.push(`Teléfono: ${args.customer.phone}`);
+  if (args.delivery) lines.push(`Entrega: ${args.delivery.label}`);
   if (args.customer.address) lines.push(`Dirección: ${args.customer.address}`);
   lines.push("");
   lines.push("Productos:");
@@ -25,7 +29,11 @@ export function buildWhatsAppMessage(args: {
     lines.push(`- ${item.quantity} x ${item.name} (${args.formatMoney(item.unitPriceCents)} c/u)`);
   }
   lines.push("");
-  lines.push(`Total: ${args.formatMoney(args.totalCents)}`);
+  if (args.delivery) {
+    lines.push(`Subtotal: ${args.formatMoney(args.totalCents)}`);
+    lines.push(`Envío: ${args.delivery.cost > 0 ? args.formatMoney(args.delivery.cost) : "sin cargo"}`);
+  }
+  lines.push(`Total: ${args.formatMoney(args.totalCents + (args.delivery?.cost ?? 0))}`);
   return lines.join("\n");
 }
 

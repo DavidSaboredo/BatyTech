@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { ProductGallery } from "@/components/ProductGallery";
+import { SaleTerms } from "@/components/SaleTerms";
 import { getPerformanceTierLabel } from "@/lib/performance-tier";
 import { formatMoney } from "@/lib/money";
 import { productImageUrl } from "@/lib/product-image";
@@ -105,6 +106,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
             <div className="text-3xl font-bold text-amber-200">{formatMoney(product.priceCents)}</div>
           </div>
+
+          <SaleTerms price={product.priceCents} />
 
           <div className="surface-card flex flex-col gap-4 rounded-3xl p-5">
             <div className="flex items-center gap-2 text-sm font-medium">

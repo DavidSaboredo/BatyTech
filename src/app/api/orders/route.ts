@@ -11,6 +11,16 @@ type CreateOrderBody = {
   items: { productId: string; quantity: number }[];
 };
 
+/** Error de un producto puntual del pedido: lleva el producto para nombrarlo en el mensaje. */
+class OrderItemError extends Error {
+  constructor(
+    readonly code: "invalid_product" | "insufficient_stock",
+    readonly product?: { id: string; name: string; stock: number },
+  ) {
+    super(code);
+  }
+}
+
 function isEmailLike(value: string) {
   return value.includes("@") && value.includes(".");
 }
@@ -39,16 +49,17 @@ export async function POST(req: Request) {
   try {
     const order = await prisma.$transaction(async (tx) => {
       const productIds = Array.from(new Set(normalizedItems.map((x) => x.productId)));
+      // Se buscan también los inactivos para poder nombrar el producto en el error.
       const products = await tx.product.findMany({
-        where: { id: { in: productIds }, isActive: true },
-        select: { id: true, priceCents: true, stock: true },
+        where: { id: { in: productIds } },
+        select: { id: true, name: true, priceCents: true, stock: true, isActive: true },
       });
 
       const productMap = new Map(products.map((p) => [p.id, p]));
       for (const item of normalizedItems) {
         const p = productMap.get(item.productId);
-        if (!p) throw new Error("invalid_product");
-        if (p.stock < item.quantity) throw new Error("insufficient_stock");
+        if (!p || !p.isActive) throw new OrderItemError("invalid_product", p);
+        if (p.stock < item.quantity) throw new OrderItemError("insufficient_stock", p);
       }
 
       for (const item of normalizedItems) {
@@ -56,7 +67,12 @@ export async function POST(req: Request) {
           where: { id: item.productId, isActive: true, stock: { gte: item.quantity } },
           data: { stock: { decrement: item.quantity } },
         });
-        if (updated.count !== 1) throw new Error("insufficient_stock");
+        if (updated.count !== 1) {
+          // Otra compra se llevó unidades en el medio: se informa el stock que quedó.
+          const fresh = await tx.product.findUnique({ where: { id: item.productId }, select: { stock: true } });
+          const p = productMap.get(item.productId)!;
+          throw new OrderItemError("insufficient_stock", { ...p, stock: fresh?.stock ?? 0 });
+        }
       }
 
       const totalCents = normalizedItems.reduce((acc, item) => {
@@ -85,11 +101,22 @@ export async function POST(req: Request) {
 
     return Response.json({ orderId: order.id });
   } catch (err) {
-    if (err instanceof Error && err.message === "invalid_product") {
-      return Response.json({ error: "Uno de los productos ya no está disponible. Revisá tu carrito." }, { status: 400 });
+    if (err instanceof OrderItemError && err.code === "invalid_product") {
+      const error = err.product
+        ? `${err.product.name} ya no está disponible. Quitalo del carrito para poder confirmar el pedido.`
+        : "Uno de los productos ya no está disponible. Revisá tu carrito.";
+      return Response.json({ error, productId: err.product?.id, available: 0 }, { status: 400 });
     }
-    if (err instanceof Error && err.message === "insufficient_stock") {
-      return Response.json({ error: "No hay stock suficiente de uno de los productos. Ajustá las cantidades en el carrito." }, { status: 409 });
+    if (err instanceof OrderItemError && err.code === "insufficient_stock" && err.product) {
+      const { id, name, stock } = err.product;
+      const available = Math.max(0, stock);
+      const error =
+        available === 0
+          ? `${name} se quedó sin stock. Quitalo del carrito para poder confirmar el pedido.`
+          : `No hay stock suficiente de ${name}: ${
+              available === 1 ? "queda 1 unidad" : `quedan ${available} unidades`
+            }. Ajustá la cantidad en el carrito.`;
+      return Response.json({ error, productId: id, available }, { status: 409 });
     }
     if (isDatabaseUnavailableError(err)) {
       return Response.json(

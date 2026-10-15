@@ -23,7 +23,7 @@ const fieldClass =
 const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
 
 export default function CheckoutPage() {
-  const { items, ready, totalCents, totalQuantity, clear } = useCart();
+  const { items, ready, totalCents, totalQuantity, clear, syncStock } = useCart();
   const [status, setStatus] = useState<Status>({ state: "idle" });
 
   const payloadItems = useMemo(
@@ -129,8 +129,15 @@ export default function CheckoutPage() {
                   }),
                 });
 
-                const data = (await res.json().catch(() => ({}))) as { orderId?: string; error?: string };
+                const data = (await res.json().catch(() => ({}))) as {
+                  orderId?: string;
+                  error?: string;
+                  productId?: string;
+                  available?: number;
+                };
                 if (!res.ok || !data.orderId) {
+                  // Si el problema fue el stock, el carrito pasa a mostrar cuántas unidades quedan.
+                  if (data.productId && typeof data.available === "number") syncStock(data.productId, data.available);
                   setStatus({
                     state: "error",
                     message: data.error || "No pudimos generar el pedido. Probá de nuevo en unos minutos.",

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useCart, type CartItem } from "@/components/CartProvider";
+import { maxAvailableLabel, maxCartQuantity, useCart, type CartItem } from "@/components/CartProvider";
 import { GeekCatSticker } from "@/components/GeekCatSticker";
 import { formatMoney } from "@/lib/money";
 import { productImageUrl } from "@/lib/product-image";
@@ -20,8 +20,8 @@ function QuantityInput({ item, onCommit }: { item: CartItem; onCommit: (quantity
   const commit = () => {
     if (draft === null) return;
     const next = Math.floor(Number(draft));
-    // Vacío o inválido: vuelve a la cantidad que tenía. Cero o negativo: queda en 1.
-    if (draft.trim() !== "" && Number.isFinite(next)) onCommit(Math.max(1, next));
+    // Vacío o inválido: vuelve a la cantidad que tenía. Cero o negativo queda en 1; de más, en el stock disponible.
+    if (draft.trim() !== "" && Number.isFinite(next)) onCommit(Math.min(Math.max(1, next), maxCartQuantity(item)));
     setDraft(null);
   };
 
@@ -30,7 +30,7 @@ function QuantityInput({ item, onCommit }: { item: CartItem; onCommit: (quantity
       type="number"
       inputMode="numeric"
       min={1}
-      max={999}
+      max={maxCartQuantity(item)}
       value={draft ?? String(item.quantity)}
       onChange={(e) => setDraft(e.target.value)}
       onBlur={commit}
@@ -42,6 +42,23 @@ function QuantityInput({ item, onCommit }: { item: CartItem; onCommit: (quantity
       className="h-11 w-12 rounded-xl border border-zinc-200 px-1 text-center text-base focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
     />
   );
+}
+
+/** Aviso de stock bajo los controles: solo aparece si llegó al máximo o si el stock cambió. */
+function StockNote({ item }: { item: CartItem }) {
+  if (typeof item.stock !== "number") return null;
+  if (item.stock <= 0) {
+    return <p className="text-xs font-medium text-red-600">Sin stock por ahora. Quitalo para poder confirmar el pedido.</p>;
+  }
+  if (item.quantity > item.stock) {
+    return (
+      <p className="text-xs font-medium text-red-600">
+        {item.stock === 1 ? "Queda 1 unidad" : `Quedan ${item.stock} unidades`}. Bajá la cantidad para poder confirmar.
+      </p>
+    );
+  }
+  if (item.quantity === item.stock) return <p className="text-xs text-zinc-500">{maxAvailableLabel(item.stock)}</p>;
+  return null;
 }
 
 export default function CartPage() {
@@ -174,6 +191,7 @@ export default function CartPage() {
                     <button
                       type="button"
                       onClick={() => setQuantity(item.productId, item.quantity + 1)}
+                      disabled={item.quantity >= maxCartQuantity(item)}
                       className={qtyButton}
                       aria-label={`Sumar una unidad de ${item.name}`}
                     >
@@ -191,6 +209,7 @@ export default function CartPage() {
                     Quitar
                   </button>
                 </div>
+                <StockNote item={item} />
               </div>
             </li>
           ))}
